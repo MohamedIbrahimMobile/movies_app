@@ -1,0 +1,34 @@
+{
+  "app_name": "Movies",
+
+  "login": "تسجيل الدخول",
+  "register": "إنشاء حساب",
+  "logout": "تسجيل الخروج",
+
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "confirm_password": "تأكيد كلمة المرور",
+
+  "forgot_password": "هل نسيت كلمة المرور؟",
+  "dont_have_account": "ليس لديك حساب؟",
+  "already_have_account": "لديك حساب بالفعل؟",
+
+  "home": "الرئيسية",
+  "search": "البحث",
+  "browse": "تصفح",
+  "profile": "الملف الشخصي",
+
+  "update_profile": "تعديل الملف الشخصي",
+  "watchlist": "قائمة المشاهدة",
+  "history": "السجل",
+
+  "movie_details": "تفاصيل الفيلم",
+  "suggestions": "اقتراحات",
+
+  "save": "حفظ",
+  "cancel": "إلغاء",
+  "delete": "حذف",
+
+  "English": "الإنجليزية",
+  "Arabic": "العربية"
+}
