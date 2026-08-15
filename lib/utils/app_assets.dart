@@ -23,4 +23,5 @@ class AppAssets {
   static const String onBoarding6Image = 'assets/images/0nBoarding6_image.png';
   static const String forgetPasswordImage = 'assets/images/forgot_password_image.png';
   static const String watchListImage = 'assets/images/watch_list_image.png';
+  static const String loginImage = 'assets/images/login_image.png';
 }
