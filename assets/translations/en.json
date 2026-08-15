@@ -8,6 +8,9 @@
   "email": "Email",
   "password": "Password",
   "confirm_password": "Confirm Password",
+  "forget_password_title": "Forget Password",
+  "verify": "Verify Email",
+
 
   "forgot_password": "Forgot Password?",
   "dont_have_account": "Don't have an account?",
