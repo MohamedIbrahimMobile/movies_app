@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/ui/home/tabs/profile_tab/update_profile_screen.dart';
+import 'package:movies_app/ui/home/tabs/profile/update_profile_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:movies_app/ui/register/register_screen.dart';
 import 'utils/app_routes.dart';
