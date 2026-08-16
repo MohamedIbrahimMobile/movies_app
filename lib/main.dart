@@ -1,5 +1,8 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:movies_app/ui/register/register_screen.dart';
+import 'utils/app_routes.dart';
+import 'utils/app_theme.dart';
 import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_theme.dart';
@@ -37,7 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.onboardingRouteName: (context) => SizedBox(),
         AppRoutes.loginRouteName: (context) => SizedBox(),
-        AppRoutes.registerRouteName: (context) => SizedBox(),
+        AppRoutes.registerRouteName: (context) => RegisterScreen(),
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.updateProfileRouteName: (context) => SizedBox(),
       },

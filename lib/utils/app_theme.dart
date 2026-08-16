@@ -15,6 +15,7 @@ class AppTheme {
 
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.blackColor,
+      iconTheme: IconThemeData(color: AppColors.yellowColor),
       elevation: 0,
       centerTitle: false,
     ),

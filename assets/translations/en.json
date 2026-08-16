@@ -4,11 +4,15 @@
   "login": "Login",
   "register": "Register",
   "logout": "Logout",
+  "avatar" : "Avatar",
 
+  "name" : "Name",
   "email": "Email",
   "password": "Password",
   "confirm_password": "Confirm Password",
+  "phone_number" : "Phone Number",
 
+  "create_account" : "Create Account",
   "forgot_password": "Forgot Password?",
   "dont_have_account": "Don't have an account?",
   "already_have_account": "Already have an account?",
