@@ -26,4 +26,8 @@ class AppAssets {
   static const String firstAvatarImage = 'assets/images/avatar_1.png';
   static const String secondAvatarImage = 'assets/images/avatar_2.png';
   static const String thirdAvatarImage = 'assets/images/avatar_3.png';
+  static const String availableNowText = 'assets/images/available_now_text.png';
+  static const String watchNowText = 'assets/images/watch_new_text.png';
+  static const String samMendesImage = 'assets/images/Sam_Mendes_image.png';
+
 }
