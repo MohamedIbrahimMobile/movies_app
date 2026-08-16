@@ -7,9 +7,12 @@
 
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
+  "name": "الاسم",
+  "phone": "الهاتف",
   "confirm_password": "تأكيد كلمة المرور",
 
   "forgot_password": "هل نسيت كلمة المرور؟",
+  "reset_password": "إعادة تعيين كلمة المرور",
   "dont_have_account": "ليس لديك حساب؟",
   "already_have_account": "لديك حساب بالفعل؟",
 
@@ -30,5 +33,8 @@
   "delete": "حذف",
 
   "English": "الإنجليزية",
-  "Arabic": "العربية"
+  "Arabic": "العربية",
+  "delete_account": "حذف الحساب",
+  "update_data": "تحديث البيانات",
+  "pick_avatar": "اختر صورة رمزية"
 }
