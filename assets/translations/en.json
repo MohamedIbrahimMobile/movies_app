@@ -4,6 +4,8 @@
   "login": "Login",
   "register": "Register",
   "logout": "Logout",
+  "create": "Create One",
+  "or": "OR",
 
   "email": "Email",
   "password": "Password",
@@ -15,6 +17,7 @@
   "forgot_password": "Forgot Password?",
   "dont_have_account": "Don't have an account?",
   "already_have_account": "Already have an account?",
+  "login_google": "Login With Google",
 
   "home": "Home",
   "search": "Search",

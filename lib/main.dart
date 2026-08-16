@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/screens/forget_password.dart';
+import 'package:movies_app/screens/login_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_theme.dart';
 
@@ -29,10 +30,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.forgetPasswordRouteName,
+      initialRoute: AppRoutes.loginRouteName,
       routes: {
         AppRoutes.onboardingRouteName: (context) => SizedBox(),
-        AppRoutes.loginRouteName: (context) => SizedBox(),
+        AppRoutes.loginRouteName: (context) => LoginScreen(),
         AppRoutes.registerRouteName: (context) => SizedBox(),
         AppRoutes.homeRouteName: (context) => SizedBox(),
         AppRoutes.updateProfileRouteName: (context) => SizedBox(),
