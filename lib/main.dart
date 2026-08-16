@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/home/tabs/profile_tab/update_profile_screen.dart';
+import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_theme.dart';
 
@@ -9,9 +10,13 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ar')],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
       path: 'assets/translations',
-      fallbackLocale: Locale('en'),
+      fallbackLocale: const Locale('en'),
+      startLocale: const Locale('en'),
       child: const MyApp(),
     ),
   );
@@ -29,12 +34,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.updateProfileRouteName,
+      initialRoute: AppRoutes.homeRouteName,
       routes: {
         AppRoutes.onboardingRouteName: (context) => SizedBox(),
         AppRoutes.loginRouteName: (context) => SizedBox(),
         AppRoutes.registerRouteName: (context) => SizedBox(),
-        AppRoutes.homeRouteName: (context) => SizedBox(),
+        AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.updateProfileRouteName: (context) => UpdateProfileScreen(),
       },
     );

@@ -33,4 +33,8 @@ class AppAssets {
   static const String avatarImage7 = 'assets/images/avatar_image7.png';
   static const String avatarImage8 = 'assets/images/avatar_image8.png';
   static const String avatarImage9 = 'assets/images/avatar_image9.png';
+  static const String availableNowText = 'assets/images/available_now_text.png';
+  static const String watchNowText = 'assets/images/watch_new_text.png';
+  static const String samMendesImage = 'assets/images/Sam_Mendes_image.png';
+
 }
