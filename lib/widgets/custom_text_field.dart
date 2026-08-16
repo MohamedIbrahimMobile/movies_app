@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../utils/app_colors.dart';
+import 'package:movies_app/utils/app_colors.dart';
 
 typedef OnValidator = String? Function(String?)?;
 

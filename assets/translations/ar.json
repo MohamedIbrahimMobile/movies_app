@@ -10,6 +10,8 @@
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
   "confirm_password": "تأكيد كلمة المرور",
+  "forget_password_title": "نسيت كلمة المرور",
+  "verify": "التحقق من البريد الإلكتروني",
 
   "forgot_password": "هل نسيت كلمة المرور؟",
   "dont_have_account": "ليس لديك حساب؟",
