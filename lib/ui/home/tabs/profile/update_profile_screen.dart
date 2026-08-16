@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/custom_widgets/update_profile/bottom_sheet_item.dart';
+import 'package:movies_app/ui/home/tabs/profile/widgets/bottom_sheet_item.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
