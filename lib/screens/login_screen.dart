@@ -4,7 +4,7 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
-import 'package:movies_app/widgets/Language_toggle_switch.dart';
+import 'package:movies_app/widgets/language_toggle_switch.dart';
 import 'package:movies_app/widgets/custom_elevated_button.dart';
 import 'package:movies_app/widgets/custom_text_field.dart';
 
