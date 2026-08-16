@@ -4,21 +4,26 @@
   "login": "Login",
   "register": "Register",
   "logout": "Logout",
-  "avatar" : "Avatar",
+  "avatar": "Avatar",
 
-  "name" : "Name",
+  "name": "Name",
   "email": "Email",
   "password": "Password",
-  "name": "Name",
   "phone": "Phone",
   "confirm_password": "Confirm Password",
-  "phone_number" : "Phone Number",
+  "phone_number": "Phone Number",
 
-  "create_account" : "Create Account",
+  "create_account": "Create Account",
+  "create": "Create One",
+  "or": "Or",
+
   "forgot_password": "Forgot Password?",
+  "forget_password_title": "Forgot Password",
   "reset_password": "Reset Password",
   "dont_have_account": "Don't have an account?",
   "already_have_account": "Already have an account?",
+  "login_google": "Login with Google",
+  "verify": "Verify Email",
 
   "home": "Home",
   "search": "Search",
@@ -38,6 +43,7 @@
 
   "English": "English",
   "Arabic": "Arabic",
+
   "delete_account": "Delete Account",
   "update_data": "Update Data",
   "pick_avatar": "Pick Avatar"

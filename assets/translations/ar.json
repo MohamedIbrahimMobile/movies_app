@@ -9,16 +9,21 @@
   "name": "الاسم",
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
-  "name": "الاسم",
   "phone": "الهاتف",
   "confirm_password": "تأكيد كلمة المرور",
   "phone_number": "رقم الهاتف",
 
   "create_account": "إنشاء حساب",
+  "create": "أنشئ واحدًا",
+  "or": "أو",
+
   "forgot_password": "هل نسيت كلمة المرور؟",
+  "forget_password_title": "نسيت كلمة المرور",
   "reset_password": "إعادة تعيين كلمة المرور",
   "dont_have_account": "ليس لديك حساب؟",
   "already_have_account": "لديك حساب بالفعل؟",
+  "login_google": "تسجيل الدخول باستخدام جوجل",
+  "verify": "التحقق من البريد الإلكتروني",
 
   "home": "الرئيسية",
   "search": "البحث",
@@ -38,7 +43,8 @@
 
   "English": "الإنجليزية",
   "Arabic": "العربية",
+
   "delete_account": "حذف الحساب",
   "update_data": "تحديث البيانات",
-  "pick_avatar": "اختر صورة رمزية"
+  "pick_avatar": "اختيار الصورة الشخصية"
 }
