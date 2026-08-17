@@ -1,5 +1,5 @@
-import 'package:movies_app/data/onboarding_button_data.dart';
-import 'package:movies_app/data/onboarding_item.dart';
+import 'package:movies_app/models/onboarding_button_data.dart';
+import 'package:movies_app/models/onboarding_item.dart';
 import 'package:movies_app/utils/app_assets.dart';
 
 List<OnboardingItem> onboardingItems = [

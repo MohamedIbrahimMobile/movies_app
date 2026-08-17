@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/data/onboarding_item.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_styles.dart';
-import '../utils/size_utils.dart';
-import 'custom_elevated_button.dart';
+import 'package:movies_app/models/onboarding_item.dart';
+import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_styles.dart';
+import 'package:movies_app/utils/size_utils.dart';
+import 'package:movies_app/widgets/custom_elevated_button.dart';
 
 class OnboardingPage extends StatelessWidget {
   final OnboardingItem item;
@@ -66,12 +66,12 @@ class OnboardingPage extends StatelessWidget {
                         child: CustomElevatedButton(
                           onPressed: button.isFinish ? onFinish
                           : button.isPrimary? onNext:onBack,
-                          backGroundColor: button.isPrimary
+                          backgroundColor: button.isPrimary
                               ? AppColors.yellowColor
                               : AppColors.transparent,
                           radius: 15,
                           verticalPadding: context.height * 0.01716,
-                          sideBorderColor: button.isPrimary
+                          sideColor: button.isPrimary
                               ? AppColors.transparent
                               : AppColors.yellowColor,
                           child: Text(

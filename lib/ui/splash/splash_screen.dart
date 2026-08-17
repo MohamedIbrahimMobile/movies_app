@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/screens/onboarding_screen.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';

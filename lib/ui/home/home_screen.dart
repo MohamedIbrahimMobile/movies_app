@@ -26,18 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: tabsList[selectedIndex],
-
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedIndex,
-
         onTap: (index) {
           setState(() {
             selectedIndex = index;
           });
         },
-
         type: BottomNavigationBarType.fixed,
-
         backgroundColor: AppColors.darkGrayColor,
         showSelectedLabels: false,
         showUnselectedLabels: false,
@@ -48,25 +44,20 @@ class _HomeScreenState extends State<HomeScreen> {
           color: AppColors.yellowColor,
           size: context.height * 0.027,
         ),
-
         unselectedIconTheme: IconThemeData(
           color: AppColors.lightGrayColor,
           size: context.height * 0.027,
         ),
-
         items: [
           buildBottomNavigationBarItem(
             icon: AppAssets.homeIcon,
           ),
-
           buildBottomNavigationBarItem(
             icon: AppAssets.searchIcon,
           ),
-
           buildBottomNavigationBarItem(
             icon: AppAssets.browseIcon,
           ),
-
           buildBottomNavigationBarItem(
             icon: AppAssets.profileIcon,
           ),
