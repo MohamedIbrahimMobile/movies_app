@@ -15,13 +15,14 @@ class AppAssets {
   static const String searchIcon = 'assets/icons/search_icon.png';
   static const String starIcon = 'assets/icons/star_icon.png';
   static const String timeIcon = 'assets/icons/time_icon.png';
-  static const String onBoarding1Image = 'assets/images/0nBoarding1_image.png';
-  static const String onBoarding2Image = 'assets/images/0nBoarding2_image.png';
-  static const String onBoarding3Image = 'assets/images/0nBoarding3_image.png';
-  static const String onBoarding4Image = 'assets/images/0nBoarding4_image.png';
-  static const String onBoarding5Image = 'assets/images/0nBoarding5_image.png';
-  static const String onBoarding6Image = 'assets/images/0nBoarding6_image.png';
+  static const String onBoarding1Image = 'assets/images/OnBoarding1_image.png';
+  static const String onBoarding2Image = 'assets/images/OnBoarding2_image.png';
+  static const String onBoarding3Image = 'assets/images/OnBoarding3_image.png';
+  static const String onBoarding4Image = 'assets/images/OnBoarding4_image.png';
+  static const String onBoarding5Image = 'assets/images/OnBoarding5_image.png';
+  static const String onBoarding6Image = 'assets/images/OnBoarding6_image.png';
   static const String forgetPasswordImage = 'assets/images/forgot_password_image.png';
   static const String watchListImage = 'assets/images/watch_list_image.png';
   static const String loginImage = 'assets/images/login_image.png';
+  static const String routeLogoImage = 'assets/images/route_logo_image.png';
 }
