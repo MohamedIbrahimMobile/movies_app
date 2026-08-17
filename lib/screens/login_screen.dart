@@ -4,7 +4,7 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
-import 'package:movies_app/widgets/Language_toggle_switch.dart';
+import 'package:movies_app/widgets/language_toggle_switch.dart';
 import 'package:movies_app/widgets/custom_elevated_button.dart';
 import 'package:movies_app/widgets/custom_text_field.dart';
 
@@ -16,28 +16,37 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
+        padding: EdgeInsets.symmetric(
+          horizontal: context.width * 0.02,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Image.asset(AppAssets.loginImage, height: context.height * 0.3),
+            Image.asset(
+              AppAssets.loginImage,
+              height: context.height * 0.3,
+            ),
+
             CustomTextField(
               prefixIcon: Image.asset(AppAssets.emailIcon),
-              filledColor: AppColors.darkGrayColor,
+              fillColor: AppColors.darkGrayColor,
               fill: true,
               hintText: 'email'.tr(),
               hintStyle: AppStyles.reg16WhiteRoboto,
             ),
+
             SizedBox(height: context.height * 0.03),
+
             CustomTextField(
               prefixIcon: Image.asset(AppAssets.passwordIcon),
-              suffixIcon: Icon(Icons.visibility_off),
-              filledColor: AppColors.darkGrayColor,
+              suffixIcon: const Icon(Icons.visibility_off),
+              fillColor: AppColors.darkGrayColor,
               fill: true,
               obscureText: true,
               hintText: 'password'.tr(),
               hintStyle: AppStyles.reg16WhiteRoboto,
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -47,19 +56,26 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
+
             SizedBox(height: context.height * 0.025),
+
             CustomElevatedButton(
               verticalPadding: context.height * 0.017,
-              backGroundColor: AppColors.yellowColor,
-              child: Text('login'.tr(), style: AppStyles.reg20BlackRoboto),
+              backgroundColor: AppColors.yellowColor,
+              child: Text(
+                'login'.tr(),
+                style: AppStyles.reg20BlackRoboto,
+              ),
               onPressed: () {},
             ),
+
             SizedBox(height: context.height * 0.01),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "dont_have_account".tr(),
+                  'dont_have_account'.tr(),
                   style: AppStyles.reg14WhiteRoboto,
                 ),
                 TextButton(
@@ -71,7 +87,9 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
+
             SizedBox(height: context.height * 0.015),
+
             Row(
               children: [
                 Expanded(
@@ -82,7 +100,10 @@ class LoginScreen extends StatelessWidget {
                     endIndent: context.width * 0.04,
                   ),
                 ),
-                Text('or'.tr(), style: AppStyles.reg15YellowRoboto),
+                Text(
+                  'or'.tr(),
+                  style: AppStyles.reg15YellowRoboto,
+                ),
                 Expanded(
                   child: Divider(
                     color: AppColors.yellowColor,
@@ -93,21 +114,28 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
+
             SizedBox(height: context.height * 0.04),
+
             CustomElevatedButton(
               verticalPadding: context.height * 0.017,
-              backGroundColor: AppColors.yellowColor,
+              backgroundColor: AppColors.yellowColor,
               child: Row(
                 spacing: context.width * 0.03,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(AppAssets.googleIcon),
-                  Text('login_google'.tr(), style: AppStyles.reg16BlackRoboto),
+                  Text(
+                    'login_google'.tr(),
+                    style: AppStyles.reg16BlackRoboto,
+                  ),
                 ],
               ),
               onPressed: () {},
             ),
+
             SizedBox(height: context.height * 0.04),
+
             LanguageToggleSwitch(),
           ],
         ),

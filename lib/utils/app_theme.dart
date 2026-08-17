@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'app_colors.dart';
 
 class AppTheme {
@@ -15,6 +16,8 @@ class AppTheme {
 
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.blackColor,
+      surfaceTintColor: Colors.transparent,
+      iconTheme: IconThemeData(color: AppColors.yellowColor),
       elevation: 0,
       centerTitle: false,
     ),
@@ -24,30 +27,19 @@ class AppTheme {
       fillColor: AppColors.darkGrayColor,
 
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(15),
         borderSide: BorderSide.none,
       ),
 
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide.none,
-      ),
-
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
-        borderSide: BorderSide(
-          color: AppColors.yellowColor,
-        ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: BorderSide(color: AppColors.redColor, width: 1),
       ),
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: AppColors.yellowColor,
-        foregroundColor: AppColors.blackColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
     ),
   );

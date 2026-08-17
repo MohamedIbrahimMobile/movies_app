@@ -22,24 +22,33 @@ class ForgetPassword extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.width * 0.03),
+        padding: EdgeInsets.symmetric(
+          horizontal: context.width * 0.03,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image.asset(AppAssets.forgetPasswordImage),
+
             SizedBox(height: context.height * 0.04),
+
             CustomTextField(
-              filledColor: AppColors.darkGrayColor,
+              fillColor: AppColors.darkGrayColor,
               fill: true,
               prefixIcon: Image.asset(AppAssets.emailIcon),
               hintText: 'email'.tr(),
               hintStyle: AppStyles.reg16WhiteRoboto,
             ),
+
             SizedBox(height: context.height * 0.03),
+
             CustomElevatedButton(
               verticalPadding: context.height * 0.013,
-              backGroundColor: AppColors.yellowColor,
-              child: Text('verify'.tr(), style: AppStyles.reg20BlackRoboto),
+              backgroundColor: AppColors.yellowColor,
+              child: Text(
+                'verify'.tr(),
+                style: AppStyles.reg20BlackRoboto,
+              ),
               onPressed: () {},
             ),
           ],

@@ -4,17 +4,25 @@ import 'package:movies_app/screens/forget_password.dart';
 import 'package:movies_app/screens/login_screen.dart';
 import 'package:movies_app/screens/onboarding_screen.dart';
 import 'package:movies_app/screens/splash_screen.dart';
+import 'package:movies_app/ui/home/home_screen.dart';
+import 'package:movies_app/ui/home/tabs/profile/update_profile_screen.dart';
+import 'package:movies_app/ui/register/register_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ar')],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ar'),
+      ],
       path: 'assets/translations',
-      fallbackLocale: Locale('en'),
+      fallbackLocale: const Locale('en'),
+      startLocale: const Locale('en'),
       child: const MyApp(),
     ),
   );
@@ -37,10 +45,10 @@ class MyApp extends StatelessWidget {
         AppRoutes.splashScreenRouteName: (context) => SplashScreen(),
         AppRoutes.onboardingRouteName: (context) => OnboardingScreen(),
         AppRoutes.loginRouteName: (context) => LoginScreen(),
-        AppRoutes.registerRouteName: (context) => SizedBox(),
-        AppRoutes.homeRouteName: (context) => SizedBox(),
-        AppRoutes.updateProfileRouteName: (context) => SizedBox(),
-        AppRoutes.forgetPasswordRouteName: (context) => ForgetPassword()
+        AppRoutes.registerRouteName: (context) => RegisterScreen(),
+        AppRoutes.homeRouteName: (context) => HomeScreen(),
+        AppRoutes.updateProfileRouteName: (context) => UpdateProfileScreen(),
+        AppRoutes.forgetPasswordRouteName: (context) => ForgetPassword(),
       },
     );
   }

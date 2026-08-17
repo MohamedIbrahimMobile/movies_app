@@ -1,40 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
+typedef OnChanged = void Function(String)?;
 typedef OnValidator = String? Function(String?)?;
 
 class CustomTextField extends StatelessWidget {
   final double? radius;
-
   final Color? borderColor;
-
   final String? hintText;
-
   final String? labelText;
-
   final TextStyle? hintStyle;
-
   final TextStyle? labelStyle;
-
-  final Color? filledColor;
-
+  final Color? fillColor;
   final bool? fill;
-
-  final Widget? prefixIcon;
-
-  final Widget? suffixIcon;
   final int? maxLines;
-
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final TextEditingController? controller;
-
-  Function(String)? onChanged;
-
+  final OnChanged? onChanged;
   final OnValidator validator;
-
-  TextInputType? keyboardType;
+  final TextInputType? keyboardType;
   final bool obscureText;
+  final String obscuringCharacter;
 
-  CustomTextField({
+  const CustomTextField({
     super.key,
     this.radius,
     this.borderColor,
@@ -42,16 +31,17 @@ class CustomTextField extends StatelessWidget {
     this.labelText,
     this.hintStyle,
     this.labelStyle,
-    this.filledColor,
     this.fill = false,
+    this.fillColor,
     this.prefixIcon,
     this.suffixIcon,
     this.maxLines = 1,
     this.controller,
     this.onChanged,
     this.validator,
-    this.obscureText = false,
     this.keyboardType = TextInputType.text,
+    this.obscureText = false,
+    this.obscuringCharacter = '.',
   });
 
   @override
@@ -59,27 +49,27 @@ class CustomTextField extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         enabledBorder: builtDecorationItem(
-          radius: radius ?? 16,
-          borderColor: borderColor ?? AppColors.transparent,
+          radius: radius ?? 15,
+          borderColor: borderColor ?? AppColors.darkGrayColor,
         ),
         focusedBorder: builtDecorationItem(
-          radius: radius ?? 16,
-          borderColor: borderColor ?? AppColors.transparent,
+          radius: radius ?? 15,
+          borderColor: borderColor ?? AppColors.darkGrayColor,
         ),
         errorBorder: builtDecorationItem(
-          radius: radius ?? 16,
+          radius: radius ?? 15,
           borderColor: AppColors.redColor,
         ),
         focusedErrorBorder: builtDecorationItem(
-          radius: radius ?? 16,
+          radius: radius ?? 15,
           borderColor: AppColors.redColor,
         ),
         hintText: hintText,
         hintStyle: hintStyle,
         labelText: labelText,
         labelStyle: labelStyle,
-        fillColor: filledColor,
-        filled: fill,
+        fillColor: fillColor,
+        filled: fill ?? false,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
       ),
@@ -89,7 +79,7 @@ class CustomTextField extends StatelessWidget {
       validator: validator,
       keyboardType: keyboardType,
       obscureText: obscureText,
-      obscuringCharacter: '*',
+      obscuringCharacter: obscuringCharacter,
     );
   }
 
@@ -99,7 +89,10 @@ class CustomTextField extends StatelessWidget {
   }) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(radius),
-      borderSide: BorderSide(color: borderColor, width: 2),
+      borderSide: BorderSide(
+        color: borderColor,
+        width: 2,
+      ),
     );
   }
 }

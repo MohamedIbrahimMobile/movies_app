@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
-
-import '../utils/app_colors.dart';
+import 'package:movies_app/utils/app_colors.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   final VoidCallback onPressed;
-
   final Widget child;
-
-  final Color? backGroundColor;
-
   final double? radius;
-
-  final Color? sideBorderColor;
-
   final double? verticalPadding;
+  final Color? backgroundColor;
+  final Color? sideColor;
 
   const CustomElevatedButton({
     super.key,
-    required this.child,
     required this.onPressed,
-    this.backGroundColor,
+    required this.child,
+    this.backgroundColor,
     this.radius,
-    this.sideBorderColor,
+    this.sideColor,
     this.verticalPadding,
   });
 
@@ -29,13 +23,15 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: backGroundColor ?? AppColors.transparent,
-        padding: EdgeInsetsGeometry.symmetric(vertical: verticalPadding ?? 0),
+        backgroundColor: backgroundColor ?? AppColors.transparent,
+        padding: EdgeInsets.symmetric(
+          vertical: verticalPadding ?? 0,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius ?? 15),
           side: BorderSide(
             width: 2,
-            color: sideBorderColor ?? AppColors.transparent,
+            color: sideColor ?? AppColors.transparent,
           ),
         ),
       ),
