@@ -4,6 +4,7 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
+import 'package:movies_app/widgets/custom_text_field.dart';
 
 class SearchTab extends StatelessWidget {
   const SearchTab({super.key});
@@ -28,24 +29,14 @@ class SearchTab extends StatelessWidget {
                     context.width * 0.03,
                   ),
                 ),
-                child: TextField(
-                  style: AppStyles.reg16WhiteRoboto,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    prefixIcon: Padding(
-                      padding: EdgeInsets.all(
-                        context.width * 0.035,
-                      ),
-                      child: Image.asset(
-                        AppAssets.searchIcon,
-                      ),
-                    ),
-                    hintText: 'search'.tr(),
-                    hintStyle: AppStyles.reg14WhiteRoboto,
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: context.height * 0.018,
-                    ),
-                  ),
+                child: CustomTextField(
+                  prefixIcon: Image.asset(
+                    AppAssets.searchIcon,),
+                  fillColor: AppColors.darkGrayColor,
+                  fill: true,
+                  hintText: 'search'.tr(),
+                  hintStyle: AppStyles.reg14WhiteRoboto,
+                  keyboardType: TextInputType.emailAddress,
                 ),
               ),
               Expanded(

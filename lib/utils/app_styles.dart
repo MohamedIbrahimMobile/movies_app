@@ -13,6 +13,7 @@ class AppStyles {
     fontWeight: FontWeight.w400,
     fontSize: 20,
     color: AppColors.whiteColor.withValues(alpha: 0.6),
+    decoration: TextDecoration.none,
   );
 
   static TextStyle reg20WhiteInter = GoogleFonts.inter(

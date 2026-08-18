@@ -17,7 +17,8 @@ class OnboardingPage extends StatelessWidget {
     required this.item,
     required this.index,
     required this.onNext,
-    required this.onBack, required this.onFinish,
+    required this.onBack,
+    required this.onFinish,
   });
 
   @override
@@ -25,14 +26,17 @@ class OnboardingPage extends StatelessWidget {
     return Stack(
       children: [
         Image.asset(item.image),
+
         Positioned(
           bottom: 0,
           left: 0,
           right: 0,
           child: Container(
             decoration: BoxDecoration(
-              color: index == 0 ? AppColors.transparent : AppColors.blackColor,
-              borderRadius: BorderRadius.only(
+              color: index == 0
+                  ? AppColors.transparent
+                  : AppColors.blackColor,
+              borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(35),
                 topLeft: Radius.circular(35),
               ),
@@ -48,37 +52,60 @@ class OnboardingPage extends StatelessWidget {
                 children: [
                   Text(
                     item.title,
-                    style: AppStyles.bold24WhiteInter,
+                    style: AppStyles.bold24WhiteInter.copyWith(
+                      decoration: TextDecoration.none,
+                    ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: context.height * 0.017),
-                  Text(
-                    item.description ?? '',
-                    style: AppStyles.reg20White60Inter,
-                    textAlign: TextAlign.center,
+                  SizedBox(
+                    height: context.height * 0.02,
                   ),
-                  SizedBox(height: context.height * 0.03),
+                  if (item.description != null) ...[
+                    Text(
+                      item.description!,
+                      style: AppStyles.reg20White60Inter.copyWith(
+                        decoration: TextDecoration.none,
+                        height: 1.2,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: context.height * 0.02,
+                    ),
+                  ] else
+                    SizedBox(
+                      height: context.height * 0.01,
+                    ),
                   for (var button in item.buttons)
                     Padding(
-                      padding: EdgeInsets.only(bottom: context.height * 0.01),
+                      padding: EdgeInsets.only(
+                        bottom: context.height * 0.01,
+                      ),
                       child: SizedBox(
                         width: double.infinity,
                         child: CustomElevatedButton(
-                          onPressed: button.isFinish ? onFinish
-                          : button.isPrimary? onNext:onBack,
+                          onPressed: button.isFinish
+                              ? onFinish
+                              : button.isPrimary
+                              ? onNext
+                              : onBack,
                           backgroundColor: button.isPrimary
                               ? AppColors.yellowColor
                               : AppColors.transparent,
                           radius: 15,
-                          verticalPadding: context.height * 0.01716,
+                          verticalPadding:
+                          context.height * 0.01716,
                           sideColor: button.isPrimary
                               ? AppColors.transparent
                               : AppColors.yellowColor,
                           child: Text(
                             button.text,
-                            style: button.isPrimary
+                            style: (button.isPrimary
                                 ? AppStyles.simi20BlackInter
-                                : AppStyles.simi20YellowInter,
+                                : AppStyles.simi20YellowInter)
+                                .copyWith(
+                              decoration: TextDecoration.none,
+                            ),
                           ),
                         ),
                       ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
@@ -22,31 +23,26 @@ class _ProfileWatchListState extends State<ProfileWatchList> {
           SizedBox(
             height: context.height * 0.025,
           ),
-
-          // Tabs
           Row(
             children: [
               Expanded(
                 child: _buildTab(
                   context,
                   icon: Icons.list,
-                  title: 'Watch List',
+                  title: 'watchlist'.tr(),
                   index: 0,
                 ),
               ),
-
               Expanded(
                 child: _buildTab(
                   context,
                   icon: Icons.folder,
-                  title: 'History',
+                  title: 'history'.tr(),
                   index: 1,
                 ),
               ),
             ],
           ),
-
-          // Content
           Expanded(
             child: Center(
               child: Image.asset(
@@ -67,7 +63,6 @@ class _ProfileWatchListState extends State<ProfileWatchList> {
         required int index,
       }) {
     final bool isSelected = selectedIndex == index;
-
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -78,31 +73,19 @@ class _ProfileWatchListState extends State<ProfileWatchList> {
         children: [
           Icon(
             icon,
-            color: isSelected
-                ? AppColors.yellowColor
-                : AppColors.whiteColor,
+            color: isSelected ? AppColors.yellowColor : AppColors.whiteColor,
             size: context.height * 0.028,
           ),
-
-          SizedBox(
-            height: context.height * 0.005,
-          ),
-
+          SizedBox(height: context.height * 0.005,),
           Text(
             title,
             style: AppStyles.reg14WhiteRoboto,
           ),
-
-          SizedBox(
-            height: context.height * 0.008,
-          ),
-
+          SizedBox(height: context.height * 0.008,),
           Container(
             height: context.height * 0.003,
             width: double.infinity,
-            color: isSelected
-                ? AppColors.yellowColor
-                : AppColors.transparent,
+            color: isSelected ? AppColors.yellowColor : AppColors.transparent,
           ),
         ],
       ),

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
@@ -21,7 +23,9 @@ class ProfileActions extends StatelessWidget {
             child: SizedBox(
               height: context.height * 0.055,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, AppRoutes.updateProfileRouteName,);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.yellowColor,
                   foregroundColor: AppColors.blackColor,
@@ -33,23 +37,24 @@ class ProfileActions extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Edit Profile',
+                  'edit_profile'.tr(),
                   style: AppStyles.reg16BlackRoboto,
                 ),
               ),
             ),
           ),
-
-          SizedBox(
-            width: context.width * 0.02,
-          ),
-
+          SizedBox(width: context.width * 0.02,),
           Expanded(
             flex: 2,
             child: SizedBox(
               height: context.height * 0.055,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    AppRoutes.loginRouteName,
+                        (route) => false,);
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.redColor,
                   foregroundColor: AppColors.whiteColor,
@@ -64,13 +69,11 @@ class ProfileActions extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Exit',
+                      'exit'.tr(),
                       style: AppStyles.reg16WhiteRoboto,
                     ),
-                    SizedBox(
-                      width: context.width * 0.015,
-                    ),
-                    const Icon(
+                    SizedBox(width: context.width * 0.015,),
+                    Icon(
                       Icons.logout,
                       size: 18,
                     ),

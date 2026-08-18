@@ -14,6 +14,7 @@ class ForgetPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+
       appBar: AppBar(
         centerTitle: true,
         title: Text(
@@ -21,37 +22,53 @@ class ForgetPassword extends StatelessWidget {
           style: AppStyles.reg16YellowRoboto,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: context.width * 0.03,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Image.asset(AppAssets.forgetPasswordImage),
 
-            SizedBox(height: context.height * 0.04),
-
-            CustomTextField(
-              fillColor: AppColors.darkGrayColor,
-              fill: true,
-              prefixIcon: Image.asset(AppAssets.emailIcon),
-              hintText: 'email'.tr(),
-              hintStyle: AppStyles.reg16WhiteRoboto,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          keyboardDismissBehavior:
+          ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: context.width * 0.02,
             ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Image.asset(
+                  AppAssets.forgetPasswordImage,
+                ),
 
-            SizedBox(height: context.height * 0.03),
+                SizedBox(
+                  height: context.height * 0.04,
+                ),
 
-            CustomElevatedButton(
-              verticalPadding: context.height * 0.013,
-              backgroundColor: AppColors.yellowColor,
-              child: Text(
-                'verify'.tr(),
-                style: AppStyles.reg20BlackRoboto,
-              ),
-              onPressed: () {},
+                CustomTextField(
+                  fillColor: AppColors.darkGrayColor,
+                  fill: true,
+                  prefixIcon: Image.asset(
+                    AppAssets.emailIcon,
+                  ),
+                  hintText: 'email'.tr(),
+                  hintStyle: AppStyles.reg16WhiteRoboto,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+
+                SizedBox(
+                  height: context.height * 0.03,
+                ),
+
+                CustomElevatedButton(
+                  verticalPadding: context.height * 0.013,
+                  backgroundColor: AppColors.yellowColor,
+                  child: Text(
+                    'verify'.tr(),
+                    style: AppStyles.reg20BlackRoboto,
+                  ),
+                  onPressed: () {},
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

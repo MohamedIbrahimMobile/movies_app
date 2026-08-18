@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
@@ -26,7 +27,7 @@ class MovieCategory extends StatelessWidget {
             ),
 
             Text(
-              'See More →',
+              'See More →'.tr(),
               style: AppStyles.reg14YellowRoboto,
             ),
           ],
@@ -72,7 +73,6 @@ class MovieCategory extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-
                           Text(
                             '7.7',
                             style: AppStyles.reg14YellowRoboto,

@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _loadSplash();
   }
   void _loadSplash()async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 3));
     if(!mounted) return;
     Navigator.pushReplacementNamed(context, AppRoutes.onboardingRouteName);
   }
@@ -41,5 +41,4 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
-
 }

@@ -63,20 +63,19 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   ),
                 ),
               ),
-
               Form(
                 child: Column(
                   spacing: context.height * 0.024,
                   children: [
                     CustomTextField(
-                      hintText: 'name',
+                      hintText: 'name'.tr(),
                       prefixIcon: Image.asset(
                         AppAssets.personIcon,
                         color: AppColors.whiteColor,
                       ),
                     ),
                     CustomTextField(
-                      hintText: 'phone',
+                      hintText: 'phone'.tr(),
                       prefixIcon: Image.asset(
                         AppAssets.phoneIcon,
                         color: AppColors.whiteColor,
@@ -85,11 +84,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   ],
                 ),
               ),
-
               Align(
                 alignment: AlignmentDirectional.centerStart,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+
+                  },
                   child: Text(
                     'reset_password'.tr(),
                     style: AppStyles.reg20WhiteRoboto,
@@ -100,7 +100,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           ),
         ),
       ),
-
       bottomNavigationBar: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -110,21 +109,34 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             spacing: context.height * 0.016,
             mainAxisSize: MainAxisSize.min,
             children: [
-              CustomElevatedButton(
-                onPressed: deleteAccount,
-                backgroundColor: AppColors.redColor,
-                child: Text(
-                  'delete_account'.tr(),
-                  style: AppStyles.reg20WhiteRoboto,
+              SizedBox(
+                width: double.infinity,
+                child: CustomElevatedButton(
+                  backgroundColor: AppColors.redColor,
+                  radius: 10,
+                  verticalPadding: context.height * 0.015,
+                  onPressed: () {
+
+                  },
+                  child: Text(
+                    'delete_account'.tr(),
+                    style: AppStyles.reg16WhiteRoboto,
+                  ),
                 ),
               ),
+              SizedBox(
+                width: double.infinity,
+                child: CustomElevatedButton(
+                  backgroundColor: AppColors.yellowColor,
+                  radius: 10,
+                  verticalPadding: context.height * 0.015,
+                  onPressed: () {
 
-              CustomElevatedButton(
-                onPressed: updateAccount,
-                backgroundColor: AppColors.yellowColor,
-                child: Text(
-                  'update_data'.tr(),
-                  style: AppStyles.reg20BlackRoboto,
+                  },
+                  child: Text(
+                    'update_data'.tr(),
+                    style: AppStyles.reg16BlackRoboto,
+                  ),
                 ),
               ),
             ],
@@ -148,14 +160,14 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             ),
             child: Container(
               height: context.height * 0.44,
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: AppColors.darkGrayColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: GridView.builder(
                 gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
+                SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   mainAxisSpacing: 20,
                   crossAxisSpacing: 15,
@@ -170,7 +182,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       setState(() {
                         selectedIndex = index;
                       });
-
                       Navigator.pop(context);
                     },
                   );
