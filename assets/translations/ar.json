@@ -1,6 +1,22 @@
 {
   "app_name": "Movies",
 
+  "onboarding_title_1": "اعثر على فيلمك المفضل القادم هنا",
+  "onboarding_desc_1": "احصل على إمكانية الوصول إلى مكتبة ضخمة من الأفلام التي تناسب جميع الأذواق.",
+  "onboarding_title_2": "اكتشف الأفلام",
+  "onboarding_desc_2": "استكشف مجموعة واسعة من الأفلام بجميع الجودات والتصنيفات.",
+  "onboarding_title_3": "استكشف جميع التصنيفات",
+  "onboarding_desc_3": "اكتشف أفلاماً من كل نوع وبجودات متنوعة تناسبك يومياً.",
+  "onboarding_title_4": "أنشئ قائمة المشاهدة",
+  "onboarding_desc_4": "احفظ الأفلام في قائمة المشاهدة الخاصة بك لمتابعتها لاحقاً.",
+  "onboarding_title_5": "قيّم وراجع واكتشف",
+  "onboarding_desc_5": "شارك أفكارك حول الأفلام التي شاهدتها وساعد الآخرين في الاكتشاف.",
+  "onboarding_title_6": "ابدأ المشاهدة الآن",
+  "explore_now": "استكشف الآن",
+  "next": "التالي",
+  "back": "رجوع",
+  "finish": "إنهاء",
+
   "login": "تسجيل الدخول",
   "register": "إنشاء حساب",
   "logout": "تسجيل الخروج",
@@ -42,11 +58,31 @@
   "save": "حفظ",
   "cancel": "إلغاء",
   "delete": "حذف",
+  "ok": "حسناً",
 
   "English": "الإنجليزية",
   "Arabic": "العربية",
 
   "delete_account": "حذف الحساب",
   "update_data": "تحديث البيانات",
-  "pick_avatar": "اختيار الصورة الشخصية"
+  "pick_avatar": "اختيار الصورة الشخصية",
+
+  "profile_updated_success": "تم تحديث البيانات بنجاح",
+  "password_reset_sent": "تم إرسال رابط إعادة ضبط كلمة السر بنجاح",
+  "logged_in_success": "تم تسجيل الدخول بنجاح",
+  "account_created_success": "تم إنشاء الحساب بنجاح",
+  "account_deleted_success": "تم حذف الحساب بنجاح",
+  "delete_account_title": "حذف الحساب",
+  "delete_account_confirm_message": "هل أنت تأكد من أنك تريد حذف حسابك؟",
+
+  "please_enter_email": "يرجى إدخال البريد الإلكتروني",
+  "please_enter_valid_email": "يرجى إدخال بريد إلكتروني صحيح",
+  "please_enter_password": "يرجى إدخال كلمة المرور",
+  "password_min_length": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+  "please_enter_name": "يرجى إدخال الاسم",
+  "please_confirm_password": "يرجى تأكيد كلمة المرور",
+  "passwords_dont_match": "كلمتا المرور غير متطابقتين",
+  "please_enter_phone_number": "يرجى إدخال رقم الهاتف",
+  "please_enter_numbers_only": "يرجى إدخال أرقام فقط",
+  "invalid_phone_number": "يرجى إدخال رقم هاتف صحيح (مثال: 01012345678)"
 }

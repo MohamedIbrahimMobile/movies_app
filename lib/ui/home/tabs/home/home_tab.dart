@@ -37,9 +37,7 @@ class HomeTab extends StatelessWidget {
                 child: Column(
                   children: [
                     AvailableMovies(),
-                    SizedBox(
-                      height: context.height * 0.02,
-                    ),
+                    SizedBox(height: context.height * 0.02,),
                     MovieCategory(),
                     SizedBox(
                       height: context.height * 0.02,
