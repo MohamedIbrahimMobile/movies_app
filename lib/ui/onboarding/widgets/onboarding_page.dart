@@ -1,5 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/models/onboarding_item.dart';
+import 'package:movies_app/models/onboarding_button_data.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
@@ -25,18 +26,20 @@ class OnboardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Image.asset(item.image),
-
+        Image.asset(
+          item.image,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          height: double.infinity,
+        ),
         Positioned(
           bottom: 0,
           left: 0,
           right: 0,
           child: Container(
             decoration: BoxDecoration(
-              color: index == 0
-                  ? AppColors.transparent
-                  : AppColors.blackColor,
-              borderRadius: const BorderRadius.only(
+              color: index == 0 ? AppColors.transparent : AppColors.blackColor,
+              borderRadius: BorderRadius.only(
                 topRight: Radius.circular(35),
                 topLeft: Radius.circular(35),
               ),
@@ -51,27 +54,23 @@ class OnboardingPage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    item.title,
+                    item.titleKey.tr(),
                     style: AppStyles.bold24WhiteInter.copyWith(
                       decoration: TextDecoration.none,
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
-                    height: context.height * 0.02,
-                  ),
-                  if (item.description != null) ...[
+                  SizedBox(height: context.height * 0.02,),
+                  if (item.descriptionKey != null) ...[
                     Text(
-                      item.description!,
+                      item.descriptionKey!.tr(),
                       style: AppStyles.reg20White60Inter.copyWith(
                         decoration: TextDecoration.none,
                         height: 1.2,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(
-                      height: context.height * 0.02,
-                    ),
+                    SizedBox(height: context.height * 0.02,),
                   ] else
                     SizedBox(
                       height: context.height * 0.01,
@@ -84,26 +83,19 @@ class OnboardingPage extends StatelessWidget {
                       child: SizedBox(
                         width: double.infinity,
                         child: CustomElevatedButton(
-                          onPressed: button.isFinish
-                              ? onFinish
-                              : button.isPrimary
-                              ? onNext
+                          onPressed: button.isFinish ? onFinish
+                              : button.isPrimary ? onNext
                               : onBack,
-                          backgroundColor: button.isPrimary
-                              ? AppColors.yellowColor
+                          backgroundColor: button.isPrimary ? AppColors.yellowColor
                               : AppColors.transparent,
                           radius: 15,
-                          verticalPadding:
-                          context.height * 0.01716,
-                          sideColor: button.isPrimary
-                              ? AppColors.transparent
+                          verticalPadding: context.height * 0.01716,
+                          sideColor: button.isPrimary ? AppColors.transparent
                               : AppColors.yellowColor,
                           child: Text(
-                            button.text,
-                            style: (button.isPrimary
-                                ? AppStyles.simi20BlackInter
-                                : AppStyles.simi20YellowInter)
-                                .copyWith(
+                            button.textKey.tr(),
+                            style: (button.isPrimary ? AppStyles.simi20BlackInter
+                                : AppStyles.simi20YellowInter).copyWith(
                               decoration: TextDecoration.none,
                             ),
                           ),

@@ -1,6 +1,22 @@
 {
   "app_name": "Movies",
 
+  "onboarding_title_1": "Find Your Next Favorite Movie Here",
+  "onboarding_desc_1": "Get access to a huge library of movies to suit all tastes. You will surely like it.",
+  "onboarding_title_2": "Discover Movies",
+  "onboarding_desc_2": "Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.",
+  "onboarding_title_3": "Explore All Genres",
+  "onboarding_desc_3": "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.",
+  "onboarding_title_4": "Create Watchlists",
+  "onboarding_desc_4": "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
+  "onboarding_title_5": "Rate, Review, and Learn",
+  "onboarding_desc_5": "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.",
+  "onboarding_title_6": "Start Watching Now",
+  "explore_now": "Explore Now",
+  "next": "Next",
+  "back": "Back",
+  "finish": "Finish",
+
   "login": "Login",
   "register": "Register",
   "logout": "Logout",
@@ -42,11 +58,31 @@
   "save": "Save",
   "cancel": "Cancel",
   "delete": "Delete",
+  "ok": "OK",
 
   "English": "English",
   "Arabic": "Arabic",
 
   "delete_account": "Delete Account",
   "update_data": "Update Data",
-  "pick_avatar": "Pick Avatar"
+  "pick_avatar": "Pick Avatar",
+
+  "profile_updated_success": "Profile updated successfully",
+  "password_reset_sent": "Password reset email has been sent successfully.",
+  "logged_in_success": "Logged in successfully",
+  "account_created_success": "Account created successfully",
+  "account_deleted_success": "Account deleted successfully",
+  "delete_account_title": "Delete Account",
+  "delete_account_confirm_message": "Are you sure you want to delete your account?",
+
+  "please_enter_email": "Please enter email",
+  "please_enter_valid_email": "Please enter a valid email",
+  "please_enter_password": "Please enter password",
+  "password_min_length": "Password must be at least 6 characters",
+  "please_enter_name": "Please enter name",
+  "please_confirm_password": "Please confirm password",
+  "passwords_dont_match": "Passwords don't match",
+  "please_enter_phone_number": "Please enter phone number",
+  "please_enter_numbers_only": "Please enter numbers only",
+  "invalid_phone_number": "Please enter a valid phone number (e.g., 01012345678)"
 }
