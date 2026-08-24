@@ -48,5 +48,8 @@
 
   "delete_account": "Delete Account",
   "update_data": "Update Data",
-  "pick_avatar": "Pick Avatar"
+  "pick_avatar": "Pick Avatar",
+
+  "watch" : "Watch",
+  "screen_shots" : "Screen Shots"
 }

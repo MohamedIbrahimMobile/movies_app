@@ -16,6 +16,11 @@ class AppAssets {
   static const String searchIcon = 'assets/icons/search_icon.png';
   static const String starIcon = 'assets/icons/star_icon.png';
   static const String timeIcon = 'assets/icons/time_icon.png';
+  static const String saveIcon = 'assets/icons/save_icon.png';
+  static const String arrowBackIcon = 'assets/icons/arrow_back_icon.png';
+
+
+
 
   static const String onBoarding1Image = 'assets/images/OnBoarding1_image.png';
   static const String onBoarding2Image = 'assets/images/OnBoarding2_image.png';
@@ -42,4 +47,13 @@ class AppAssets {
   static const String watchNowText = 'assets/images/watch_new_text.png';
   static const String samMendesImage = 'assets/images/Sam_Mendes_image.png';
   static const String routeLogoImage = 'assets/images/route_logo_image.png';
+  static const String doctorStrangeImage = 'assets/images/doctor_strange_image.png';
+  static const String playImage = 'assets/images/play_image.png';
+  static const String screenshot1mage = 'assets/images/screenshot1_image.png';
+  static const String screenshot2mage = 'assets/images/screenshot2_image.png';
+  static const String screenshot3mage = 'assets/images/screenshot3_image.png';
+
+
+
+
 }

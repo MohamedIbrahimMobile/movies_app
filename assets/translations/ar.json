@@ -48,5 +48,9 @@
 
   "delete_account": "حذف الحساب",
   "update_data": "تحديث البيانات",
-  "pick_avatar": "اختيار الصورة الشخصية"
+  "pick_avatar": "اختيار الصورة الشخصية",
+
+  "watch" : "شاهد",
+  "screen_shots" : "لقطات الشاشة"
+
 }

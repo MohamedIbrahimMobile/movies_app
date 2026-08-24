@@ -5,6 +5,8 @@ import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
+import '../../../../../utils/app_routes.dart';
+
 class AvailableMovies extends StatelessWidget {
   const AvailableMovies({super.key});
 
@@ -24,15 +26,23 @@ class AvailableMovies extends StatelessWidget {
             return Stack(
               children: [
                 Center(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(
-                      context.width * 0.02,
-                    ),
-                    child: Image.asset(
-                      AppAssets.samMendesImage,
-                      height: context.height * 0.30,
-                      width: context.width * 0.52,
-                      fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.movieDetailsScreenRouteName,
+                      );
+                    }
+                    ,child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        context.width * 0.02,
+                      ),
+                      child: Image.asset(
+                        AppAssets.samMendesImage,
+                        height: context.height * 0.30,
+                        width: context.width * 0.52,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
