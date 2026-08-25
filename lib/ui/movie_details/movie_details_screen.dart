@@ -25,7 +25,7 @@ class MovieDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MovieDetailsCubit(DioManager())
-        ..getMovieDetails(movies.data?.movie?.id ?? 0),
+        ..getMovieDetails(movies.id ?? 0),
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
@@ -36,7 +36,7 @@ class MovieDetailsScreen extends StatelessWidget {
               return MainErrorWidget(
                 errorMessage: state.errorMessage.isEmpty ? 'Try Again' : state.errorMessage,
                 onPressed: () {
-                  context.read<MovieDetailsCubit>().getMovieDetails(movies.data?.movie?.id ?? 0);
+                  context.read<MovieDetailsCubit>().getMovieDetails(movies.id ?? 0);
                 },
               );
             } else if (state is MovieSuccessState) {
