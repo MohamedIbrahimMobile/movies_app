@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
-typedef OnChanged = void Function(String)?;
-typedef OnValidator = String? Function(String?)?;
-
 class CustomTextField extends StatelessWidget {
   final double? radius;
   final Color? borderColor;
@@ -12,13 +9,13 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? hintStyle;
   final TextStyle? labelStyle;
   final Color? fillColor;
-  final bool? fill;
+  final bool fill;
   final int? maxLines;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextEditingController? controller;
-  final OnChanged? onChanged;
-  final OnValidator validator;
+  final ValueChanged<String>? onChanged;
+  final String? Function(String?)? validator;
   final TextInputType? keyboardType;
   final bool obscureText;
   final String obscuringCharacter;
@@ -31,8 +28,8 @@ class CustomTextField extends StatelessWidget {
     this.labelText,
     this.hintStyle,
     this.labelStyle,
-    this.fill = false,
-    this.fillColor,
+    this.fill = true,
+    this.fillColor = AppColors.darkGrayColor,
     this.prefixIcon,
     this.suffixIcon,
     this.maxLines = 1,
@@ -46,22 +43,26 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fieldRadius = radius ?? 15;
+    final fieldBorderColor =
+        borderColor ?? AppColors.darkGrayColor;
+
     return TextFormField(
       decoration: InputDecoration(
-        enabledBorder: builtDecorationItem(
-          radius: radius ?? 15,
-          borderColor: borderColor ?? AppColors.darkGrayColor,
+        enabledBorder: _buildBorder(
+          radius: fieldRadius,
+          borderColor: fieldBorderColor,
         ),
-        focusedBorder: builtDecorationItem(
-          radius: radius ?? 15,
-          borderColor: borderColor ?? AppColors.darkGrayColor,
+        focusedBorder: _buildBorder(
+          radius: fieldRadius,
+          borderColor: fieldBorderColor,
         ),
-        errorBorder: builtDecorationItem(
-          radius: radius ?? 15,
+        errorBorder: _buildBorder(
+          radius: fieldRadius,
           borderColor: AppColors.redColor,
         ),
-        focusedErrorBorder: builtDecorationItem(
-          radius: radius ?? 15,
+        focusedErrorBorder: _buildBorder(
+          radius: fieldRadius,
           borderColor: AppColors.redColor,
         ),
         hintText: hintText,
@@ -69,7 +70,7 @@ class CustomTextField extends StatelessWidget {
         labelText: labelText,
         labelStyle: labelStyle,
         fillColor: fillColor,
-        filled: fill ?? false,
+        filled: fill,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
       ),
@@ -83,7 +84,7 @@ class CustomTextField extends StatelessWidget {
     );
   }
 
-  OutlineInputBorder builtDecorationItem({
+  OutlineInputBorder _buildBorder({
     required double radius,
     required Color borderColor,
   }) {

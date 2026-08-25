@@ -1,7 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_assets.dart';
-import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
@@ -14,7 +13,7 @@ class ProfileStats extends StatelessWidget {
       padding: EdgeInsets.only(
         left: context.width * 0.045,
         right: context.width * 0.045,
-        top: context.height * 0.025,
+        top: context.height * 0.030,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -22,24 +21,19 @@ class ProfileStats extends StatelessWidget {
           Column(
             children: [
               Container(
-                width: context.width * 0.20,
-                height: context.width * 0.20,
+                width: context.width * 0.24,
+                height: context.width * 0.22,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: AppColors.darkGrayColor,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.all(
-                    context.width * 0.015,
-                  ),
+                child: ClipOval(
                   child: Image.asset(
-                    AppAssets.profileIcon,
+                    AppAssets.avatarImage2,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(
-                height: context.height * 0.008,
-              ),
+              SizedBox(height: context.height * 0.02,),
               Text(
                 'John Safwat',
                 style: AppStyles.bold20WhiteRoboto.copyWith(
@@ -48,35 +42,34 @@ class ProfileStats extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
+          SizedBox(width: context.width * 0.15,),
           Column(
             children: [
               Text(
                 '12',
                 style: AppStyles.bold24WhiteRoboto,
               ),
+               SizedBox(height: context.height * 0.01,),
               Text(
-                'Wish List'.tr(),
+                'watchlist'.tr(),
                 style: AppStyles.bold20WhiteRoboto.copyWith(
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
             ],
           ),
-
-          SizedBox(
-            width: context.width * 0.10,
-          ),
+          SizedBox(width: context.width * 0.18,),
           Column(
             children: [
               Text(
                 '10',
                 style: AppStyles.bold24WhiteRoboto,
               ),
+               SizedBox(height: context.height * 0.01,),
               Text(
-                'History'.tr(),
+                'history'.tr(),
                 style: AppStyles.bold20WhiteRoboto.copyWith(
-                  fontSize: 14,
+                  fontSize: 16,
                 ),
               ),
             ],

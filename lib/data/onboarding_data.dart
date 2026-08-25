@@ -1,58 +1,56 @@
-import 'package:movies_app/data/onboarding_button_data.dart';
-import 'package:movies_app/data/onboarding_item.dart';
 import 'package:movies_app/utils/app_assets.dart';
+import '../models/onboarding_button_data.dart';
 
 List<OnboardingItem> onboardingItems = [
   OnboardingItem(
     image: AppAssets.onBoarding1Image,
-    title: 'Find Your Next Favorite Movie Here',
-    description:
-        'Get access to a huge library of movies to suit all tastes. You will surely like it.',
-    buttons: [OnboardingButtonData(text: 'Explore Now', isPrimary: true)],
+    titleKey: 'onboarding_title_1',
+    descriptionKey: 'onboarding_desc_1',
+    buttons: [
+      OnboardingButtonData(textKey: 'explore_now', isPrimary: true),
+    ],
   ),
   OnboardingItem(
     image: AppAssets.onBoarding2Image,
-    title: 'Discover Movies',
-    description:
-        'Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.',
-    buttons: [OnboardingButtonData(text: 'Next', isPrimary: true)],
+    titleKey: 'onboarding_title_2',
+    descriptionKey: 'onboarding_desc_2',
+    buttons: [
+      OnboardingButtonData(textKey: 'next', isPrimary: true),
+    ],
   ),
   OnboardingItem(
     image: AppAssets.onBoarding3Image,
-    title: 'Explore All Genres',
-    description:
-        'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.',
+    titleKey: 'onboarding_title_3',
+    descriptionKey: 'onboarding_desc_3',
     buttons: [
-      OnboardingButtonData(text: 'Next', isPrimary: true),
-      OnboardingButtonData(text: 'Back', isPrimary: false),
+      OnboardingButtonData(textKey: 'next', isPrimary: true),
+      OnboardingButtonData(textKey: 'back', isPrimary: false),
     ],
   ),
   OnboardingItem(
     image: AppAssets.onBoarding4Image,
-    title: 'Create Watchlists',
-    description:
-        'Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.',
+    titleKey: 'onboarding_title_4',
+    descriptionKey: 'onboarding_desc_4',
     buttons: [
-      OnboardingButtonData(text: 'Next', isPrimary: true),
-      OnboardingButtonData(text: 'Back', isPrimary: false),
+      OnboardingButtonData(textKey: 'next', isPrimary: true),
+      OnboardingButtonData(textKey: 'back', isPrimary: false),
     ],
   ),
   OnboardingItem(
     image: AppAssets.onBoarding5Image,
-    title: 'Rate, Review, and Learn',
-    description:
-        'Share your thoughts on the movies you\'ve watched. Dive deep into film details and help others discover great movies with your reviews.',
+    titleKey: 'onboarding_title_5',
+    descriptionKey: 'onboarding_desc_5',
     buttons: [
-      OnboardingButtonData(text: 'Next', isPrimary: true),
-      OnboardingButtonData(text: 'Back', isPrimary: false),
+      OnboardingButtonData(textKey: 'next', isPrimary: true),
+      OnboardingButtonData(textKey: 'back', isPrimary: false),
     ],
   ),
   OnboardingItem(
     image: AppAssets.onBoarding6Image,
-    title: 'Start Watching Now',
+    titleKey: 'onboarding_title_6',
     buttons: [
-      OnboardingButtonData(text: 'Finish', isPrimary: true,isFinish: true),
-      OnboardingButtonData(text: 'Back', isPrimary: false),
+      OnboardingButtonData(textKey: 'finish', isPrimary: true, isFinish: true),
+      OnboardingButtonData(textKey: 'back', isPrimary: false),
     ],
   ),
 ];
