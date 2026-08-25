@@ -68,6 +68,8 @@
   "update_data": "Update Data",
   "pick_avatar": "Pick Avatar",
 
+  "watch" : "Watch",
+  "screen_shots" : "Screen Shots"
   "profile_updated_success": "Profile updated successfully",
   "password_reset_sent": "Password reset email has been sent successfully.",
   "logged_in_success": "Logged in successfully",

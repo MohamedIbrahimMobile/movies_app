@@ -68,6 +68,9 @@
   "update_data": "تحديث البيانات",
   "pick_avatar": "اختيار الصورة الشخصية",
 
+  "watch" : "شاهد",
+  "screen_shots" : "لقطات الشاشة"
+
   "profile_updated_success": "تم تحديث البيانات بنجاح",
   "password_reset_sent": "تم إرسال رابط إعادة ضبط كلمة السر بنجاح",
   "logged_in_success": "تم تسجيل الدخول بنجاح",
