@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/onboarding/onboarding_screen.dart';
+import 'package:movies_app/ui/similar_movies/similar_movies.dart';
 import 'package:movies_app/ui/splash/splash_screen.dart';
 import 'package:movies_app/ui/auth/login/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login/login_screen.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.updateProfileRouteName: (context) => UpdateProfileScreen(),
         AppRoutes.forgetPasswordRouteName: (context) => ForgetPassword(),
+        AppRoutes.similarMoviesRouteName: (context) => SimilarMovies(),
       },
     );
   }
