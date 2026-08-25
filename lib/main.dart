@@ -5,6 +5,7 @@ import 'package:movies_app/api/model/data.dart';
 import 'package:movies_app/api/model/movie.dart';
 import 'package:movies_app/ui/movie_details/movie_details_screen.dart';
 import 'package:movies_app/ui/onboarding/onboarding_screen.dart';
+import 'package:movies_app/ui/similar_movies/similar_movies.dart';
 import 'package:movies_app/ui/splash/splash_screen.dart';
 import 'package:movies_app/ui/auth/login/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login/login_screen.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.updateProfileRouteName: (context) => UpdateProfileScreen(),
         AppRoutes.forgetPasswordRouteName: (context) => ForgetPassword(),
+        AppRoutes.similarMoviesRouteName: (context) => SimilarMovies(),
       },
     );
   }
