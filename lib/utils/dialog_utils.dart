@@ -110,7 +110,7 @@ class DialogUtils {
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: 1,
-      backgroundColor: AppColors.greenColor,
+      backgroundColor: AppColors.yellowColor,
       textColor: AppColors.blackColor,
       fontSize: 16.0,
     );

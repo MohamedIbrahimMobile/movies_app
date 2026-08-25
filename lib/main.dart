@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.splashScreenRouteName,
+      initialRoute: AppRoutes.loginRouteName,
       onGenerateRoute: (settings) {
         if (settings.name == AppRoutes.movieDetailsScreenRouteName) {
           final movies = settings.arguments as Movies? ??
@@ -71,7 +71,6 @@ class MyApp extends StatelessWidget {
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.updateProfileRouteName: (context) => UpdateProfileScreen(),
         AppRoutes.forgetPasswordRouteName: (context) => ForgetPassword(),
-        AppRoutes.similarMoviesRouteName: (context) => SimilarMovies(),
       },
     );
   }

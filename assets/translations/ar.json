@@ -54,7 +54,7 @@
 
   "movie_details": "تفاصيل الفيلم",
   "suggestions": "اقتراحات",
-  "similar": "مماثل",
+  "similar": "مشابه",
 
   "save": "حفظ",
   "cancel": "إلغاء",
@@ -69,7 +69,7 @@
   "pick_avatar": "اختيار الصورة الشخصية",
 
   "watch" : "شاهد",
-  "screen_shots" : "لقطات الشاشة"
+  "screen_shots" : "لقطات الشاشة",
 
   "profile_updated_success": "تم تحديث البيانات بنجاح",
   "password_reset_sent": "تم إرسال رابط إعادة ضبط كلمة السر بنجاح",

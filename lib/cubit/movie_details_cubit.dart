@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/api/dio_manager.dart';
-import 'package:movies_app/ui/cubit/movie_details_state.dart';
+
+import 'movie_details_state.dart';
 
 
 

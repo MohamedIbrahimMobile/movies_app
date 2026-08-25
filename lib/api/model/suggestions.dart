@@ -17,7 +17,7 @@ class Suggestions {
     status = json['status'];
     statusMessage = json['status_message'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
-    meta = json['meta'] != null ? Meta.fromJson(json['@meta']) : null;
+    meta = json['@meta'] != null ? Meta.fromJson(json['@meta']) : null;
   }
   String? status;
   String? statusMessage;

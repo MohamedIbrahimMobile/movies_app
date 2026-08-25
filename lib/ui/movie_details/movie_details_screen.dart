@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/api/dio_manager.dart';
 import 'package:movies_app/api/model/movies.dart';
-import 'package:movies_app/ui/cubit/movie_details_cubit.dart';
-import 'package:movies_app/ui/cubit/movie_details_state.dart';
-import 'package:movies_app/ui/movie_details/screen_shot_widget.dart';
-import 'package:movies_app/ui/movie_details/stat_chip_widget.dart';
+import 'package:movies_app/cubit/movie_details_cubit.dart';
+import 'package:movies_app/cubit/movie_details_state.dart';
+import 'package:movies_app/ui/movie_details/widgets/screen_shot_widget.dart';
+import 'package:movies_app/ui/movie_details/widgets/stat_chip_widget.dart';
+import 'package:movies_app/ui/similar_movies/similar_movies.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
@@ -30,7 +31,7 @@ class MovieDetailsScreen extends StatelessWidget {
         body: BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
           builder: (context, state) {
             if (state is MovieLoadingState) {
-              return  MainLoadingWidget();
+              return const MainLoadingWidget();
             } else if (state is MovieErrorState) {
               return MainErrorWidget(
                 errorMessage: state.errorMessage.isEmpty ? 'Try Again' : state.errorMessage,
@@ -50,11 +51,11 @@ class MovieDetailsScreen extends StatelessWidget {
                           movie.mediumCoverImage ?? '',
                           fit: BoxFit.fill,
                           width: double.infinity,
-                          height: context.height*0.6,
-                          ),
+                          height: context.height * 0.6,
+                        ),
                         Container(
-                          height: context.height*0.6,
-                          decoration:  BoxDecoration(
+                          height: context.height * 0.6,
+                          decoration: BoxDecoration(
                             gradient: LinearGradient(
                               colors: [
                                 AppColors.transparent,
@@ -66,21 +67,21 @@ class MovieDetailsScreen extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          top: context.height*0.06,
-                          left: context.width*0.04,
+                          top: context.height * 0.06,
+                          left: context.width * 0.04,
                           child: InkWell(
                             onTap: () => Navigator.pop(context),
                             child: Image.asset(AppAssets.arrowBackIcon),
                           ),
                         ),
                         Positioned(
-                          top: context.height*0.06,
-                          right: context.width*0.04,
+                          top: context.height * 0.06,
+                          right: context.width * 0.04,
                           child: Image.asset(AppAssets.saveIcon),
                         ),
                         Positioned(
-                          top: context.height*0.3,
-                          right: context.width*0.4,
+                          top: context.height * 0.3,
+                          right: context.width * 0.4,
                           child: Image.asset(AppAssets.playImage),
                         ),
                       ],
@@ -88,7 +89,7 @@ class MovieDetailsScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: context.width * 0.04),
                       child: Column(
-                        spacing: context.height*0.02,
+                        spacing: context.height * 0.02,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
@@ -103,15 +104,15 @@ class MovieDetailsScreen extends StatelessWidget {
                           ),
                           CustomElevatedButton(
                             backgroundColor: AppColors.redColor,
-                            verticalPadding: context.height*0.015,
-                            onPressed: () async{
+                            verticalPadding: context.height * 0.015,
+                            onPressed: () async {
                               final String urlString = movie.url ?? '';
                               if (urlString.isNotEmpty) {
                                 final Uri url = Uri.parse(urlString);
                                 if (await canLaunchUrl(url)) {
-                              await launchUrl(url, mode: LaunchMode.inAppWebView);
+                                  await launchUrl(url, mode: LaunchMode.inAppWebView);
+                                }
                               }
-                            }
                             },
                             child: Text(
                               'watch'.tr(),
@@ -138,8 +139,7 @@ class MovieDetailsScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Text(
-                            'screen_shots'.tr(),
+                          Text('screen_shots'.tr(),
                             style: AppStyles.bold24WhiteRoboto,
                           ),
                           ScreenShotWidget(
@@ -151,14 +151,17 @@ class MovieDetailsScreen extends StatelessWidget {
                           ScreenShotWidget(
                             image: movie.largeScreenshotImage3 ?? '',
                           ),
+                          SimilarMovies(
+                            movieId: movie.id ?? 0,
+                          ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               );
             }
-            return Container() ;
+            return SizedBox.shrink();
           },
         ),
       ),

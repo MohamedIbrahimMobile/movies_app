@@ -3,11 +3,21 @@ import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
-class MovieRating extends StatelessWidget {
-   MovieRating({super.key, required this.movieRating, required this.ratingImage});
-  double movieRating;
-  String ratingImage;
+class MovieRating extends StatefulWidget {
+  final double movieRating;
+  final String ratingImage;
 
+  const MovieRating({
+    super.key,
+    required this.movieRating,
+    required this.ratingImage,
+  });
+
+  @override
+  State<MovieRating> createState() => _MovieRatingState();
+}
+
+class _MovieRatingState extends State<MovieRating> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,9 +37,9 @@ class MovieRating extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         spacing: context.width*0.02,
         children: [
-          Text("${movieRating}",
+          Text("${widget.movieRating}",
               style: AppStyles.reg16WhiteRoboto),
-          Image.asset(ratingImage,
+          Image.asset(widget.ratingImage,
           height: 15,
           width: 15,),
         ],

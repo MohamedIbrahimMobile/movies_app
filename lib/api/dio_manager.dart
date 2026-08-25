@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:movies_app/api/end_point.dart';
 import 'package:movies_app/api/model/movies.dart';
-import 'package:movies_app/api/model/Suggestions.dart';
+import 'package:movies_app/api/model/suggestions.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioManager {
