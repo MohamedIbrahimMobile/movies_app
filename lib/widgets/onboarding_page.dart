@@ -66,12 +66,12 @@ class OnboardingPage extends StatelessWidget {
                         child: CustomElevatedButton(
                           onPressed: button.isFinish ? onFinish
                           : button.isPrimary? onNext:onBack,
-                          backGroundColor: button.isPrimary
+                          backgroundColor: button.isPrimary
                               ? AppColors.yellowColor
                               : AppColors.transparent,
                           radius: 15,
                           verticalPadding: context.height * 0.01716,
-                          sideBorderColor: button.isPrimary
+                          sideColor: button.isPrimary
                               ? AppColors.transparent
                               : AppColors.yellowColor,
                           child: Text(
