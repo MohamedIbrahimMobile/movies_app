@@ -1,4 +1,5 @@
 import 'package:movies_app/utils/app_assets.dart';
+
 import '../models/onboarding_button_data.dart';
 
 List<OnboardingItem> onboardingItems = [
@@ -6,17 +7,13 @@ List<OnboardingItem> onboardingItems = [
     image: AppAssets.onBoarding1Image,
     titleKey: 'onboarding_title_1',
     descriptionKey: 'onboarding_desc_1',
-    buttons: [
-      OnboardingButtonData(textKey: 'explore_now', isPrimary: true),
-    ],
+    buttons: [OnboardingButtonData(textKey: 'explore_now', isPrimary: true)],
   ),
   OnboardingItem(
     image: AppAssets.onBoarding2Image,
     titleKey: 'onboarding_title_2',
     descriptionKey: 'onboarding_desc_2',
-    buttons: [
-      OnboardingButtonData(textKey: 'next', isPrimary: true),
-    ],
+    buttons: [OnboardingButtonData(textKey: 'next', isPrimary: true)],
   ),
   OnboardingItem(
     image: AppAssets.onBoarding3Image,

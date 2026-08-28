@@ -25,13 +25,10 @@ class SearchTab extends StatelessWidget {
                 height: context.height * 0.06,
                 decoration: BoxDecoration(
                   color: AppColors.darkGrayColor,
-                  borderRadius: BorderRadius.circular(
-                    context.width * 0.03,
-                  ),
+                  borderRadius: BorderRadius.circular(context.width * 0.03),
                 ),
                 child: CustomTextField(
-                  prefixIcon: Image.asset(
-                    AppAssets.searchIcon,),
+                  prefixIcon: Image.asset(AppAssets.searchIcon),
                   fillColor: AppColors.darkGrayColor,
                   fill: true,
                   hintText: 'search'.tr(),

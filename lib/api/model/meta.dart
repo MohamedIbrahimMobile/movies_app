@@ -1,24 +1,17 @@
-// api_version : 2
-// execution_time : "0 ms"
-
 class Meta {
-  int? apiVersion;
-  String? executionTime;
+  final int? apiVersion;
+  final String? executionTime;
 
-  Meta({
-    this.apiVersion,
-    this.executionTime,
-  });
+  const Meta({this.apiVersion, this.executionTime});
 
-  Meta.fromJson(dynamic json) {
-    apiVersion = json['api_version'];
-    executionTime = json['execution_time'];
+  factory Meta.fromJson(Map<String, dynamic> json) {
+    return Meta(
+      apiVersion: json['api_version'],
+      executionTime: json['execution_time'],
+    );
   }
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['api_version'] = apiVersion;
-    map['execution_time'] = executionTime;
-    return map;
+    return {'api_version': apiVersion, 'execution_time': executionTime};
   }
 }

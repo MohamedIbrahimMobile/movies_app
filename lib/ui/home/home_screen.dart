@@ -16,64 +16,77 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-
-  final List<Widget> tabsList = [
-    HomeTab(), SearchTab(),
-    BrowseTab(),ProfileTab(),
-  ];
+  int selectedCategory = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: tabsList[selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedIndex,
-        onTap: (index) {
+    final List<Widget> tabsList = [
+      HomeTab(
+        onBrowseTap: (currentCategory) {
           setState(() {
-            selectedIndex = index;
+            selectedIndex = 2;
+            selectedCategory = currentCategory;
           });
         },
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: AppColors.darkGrayColor,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        selectedItemColor: AppColors.yellowColor,
-        unselectedItemColor: AppColors.lightGrayColor,
+      ),
+      SearchTab(),
+      BrowseTab(selectedCategory: selectedCategory),
+      ProfileTab(),
+    ];
 
-        selectedIconTheme: IconThemeData(
-          color: AppColors.yellowColor,
-          size: context.height * 0.027,
+    return Scaffold(
+      extendBody: true,
+      body: tabsList[selectedIndex],
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: context.width * 0.02),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                highlightColor: Colors.transparent,
+                splashFactory: NoSplash.splashFactory,
+              ),
+              child: BottomNavigationBar(
+                currentIndex: selectedIndex,
+                onTap: (index) {
+                  setState(() {
+                    selectedIndex = index;
+                  });
+                },
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: AppColors.darkGrayColor,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                selectedItemColor: AppColors.yellowColor,
+                unselectedItemColor: AppColors.lightGrayColor,
+                selectedIconTheme: IconThemeData(
+                  color: AppColors.yellowColor,
+                  size: context.height * 0.027,
+                ),
+                unselectedIconTheme: IconThemeData(
+                  color: AppColors.lightGrayColor,
+                  size: context.height * 0.027,
+                ),
+                items: [
+                  buildBottomNavigationBarItem(icon: AppAssets.homeIcon),
+                  buildBottomNavigationBarItem(icon: AppAssets.searchIcon),
+                  buildBottomNavigationBarItem(icon: AppAssets.browseIcon),
+                  buildBottomNavigationBarItem(icon: AppAssets.profileIcon),
+                ],
+              ),
+            ),
+          ),
         ),
-        unselectedIconTheme: IconThemeData(
-          color: AppColors.lightGrayColor,
-          size: context.height * 0.027,
-        ),
-        items: [
-          buildBottomNavigationBarItem(
-            icon: AppAssets.homeIcon,
-          ),
-          buildBottomNavigationBarItem(
-            icon: AppAssets.searchIcon,
-          ),
-          buildBottomNavigationBarItem(
-            icon: AppAssets.browseIcon,
-          ),
-          buildBottomNavigationBarItem(
-            icon: AppAssets.profileIcon,
-          ),
-        ],
       ),
     );
   }
 
-  BottomNavigationBarItem buildBottomNavigationBarItem({
-    required String icon,
-  })
-  {
+  BottomNavigationBarItem buildBottomNavigationBarItem({required String icon}) {
     return BottomNavigationBarItem(
-      icon: ImageIcon(
-        AssetImage(icon),
-        size: context.height * 0.027,
+      icon: Padding(
+        padding: EdgeInsets.only(top: context.height * 0.006),
+        child: ImageIcon(AssetImage(icon), size: context.height * 0.027),
       ),
       label: '',
     );

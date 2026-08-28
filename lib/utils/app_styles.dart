@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'app_colors.dart';
 
 class AppStyles {
@@ -97,6 +98,12 @@ class AppStyles {
   static TextStyle reg20WhiteRoboto = GoogleFonts.roboto(
     fontWeight: FontWeight.w400,
     fontSize: 20,
+    color: AppColors.whiteColor,
+  );
+
+  static TextStyle reg18WhiteRoboto = GoogleFonts.roboto(
+    fontWeight: FontWeight.w400,
+    fontSize: 18,
     color: AppColors.whiteColor,
   );
 

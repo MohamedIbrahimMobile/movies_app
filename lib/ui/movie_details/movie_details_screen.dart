@@ -1,170 +1,247 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/api/dio_manager.dart';
-import 'package:movies_app/api/model/movies.dart';
-import 'package:movies_app/cubit/movie_details_cubit.dart';
-import 'package:movies_app/cubit/movie_details_state.dart';
-import 'package:movies_app/ui/movie_details/widgets/screen_shot_widget.dart';
-import 'package:movies_app/ui/movie_details/widgets/stat_chip_widget.dart';
-import 'package:movies_app/ui/similar_movies/similar_movies.dart';
+import 'package:movies_app/blocs/movie_details/movie_details_cubit.dart';
+import 'package:movies_app/blocs/movie_details/movie_details_state.dart';
+import 'package:movies_app/ui/movie_details/widgets/custom_btn.dart';
+import 'package:movies_app/ui/movie_details/widgets/movie_cast.dart';
+import 'package:movies_app/ui/movie_details/widgets/movie_details_up_section.dart';
+import 'package:movies_app/ui/movie_details/widgets/movie_genres.dart';
+import 'package:movies_app/ui/movie_details/widgets/movie_screen_shot.dart';
+import 'package:movies_app/ui/movie_details/widgets/movie_summary.dart';
+import 'package:movies_app/ui/movie_details/widgets/similar_movies.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
-import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
-import 'package:movies_app/widgets/custom_elevated_button.dart';
+import 'package:movies_app/widgets/image_error_placeholder.dart';
 import 'package:movies_app/widgets/main_error_widget.dart';
 import 'package:movies_app/widgets/main_loading_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class MovieDetailsScreen extends StatelessWidget {
-  final Movies movies;
-  const MovieDetailsScreen({super.key, required this.movies});
+class MovieDetailsScreen extends StatefulWidget {
+  const MovieDetailsScreen({super.key});
+
+  @override
+  State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
+}
+
+class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
+  bool isSaved = false;
+  bool isPlay = false;
+
+  YoutubePlayerController? youtubeController;
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(scrollListener);
+  }
 
   @override
   Widget build(BuildContext context) {
+    final int movieId = ModalRoute.of(context)!.settings.arguments as int;
+
     return BlocProvider(
-      create: (context) => MovieDetailsCubit(DioManager())
-        ..getMovieDetails(movies.id ?? 0),
+      create: (context) => MovieDetailsCubit()..getMovieDetails(movieId),
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
           builder: (context, state) {
             if (state is MovieLoadingState) {
               return const MainLoadingWidget();
-            } else if (state is MovieErrorState) {
-              return MainErrorWidget(
-                errorMessage: state.errorMessage.isEmpty ? 'Try Again' : state.errorMessage,
-                onPressed: () {
-                  context.read<MovieDetailsCubit>().getMovieDetails(movies.id ?? 0);
-                },
+            }
+
+            if (state is MovieErrorState) {
+              return Center(
+                child: MainErrorWidget(
+                  message: state.errorMessage,
+                  onPressed: () => context
+                      .read<MovieDetailsCubit>()
+                      .getMovieDetails(movieId),
+                ),
               );
-            } else if (state is MovieSuccessState) {
+            }
+
+            if (state is MovieSuccessState) {
               final movie = state.movie;
+
               return SingleChildScrollView(
+                controller: scrollController,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Stack(
+                      alignment: Alignment.center,
                       children: [
-                        Image.network(
-                          movie.mediumCoverImage ?? '',
-                          fit: BoxFit.fill,
-                          width: double.infinity,
-                          height: context.height * 0.6,
-                        ),
-                        Container(
-                          height: context.height * 0.6,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                AppColors.transparent,
-                                AppColors.blackColor,
-                              ],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
+                        isPlay
+                            ? SafeArea(
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    top: context.height * 0.12,
+                                  ),
+                                  child: YoutubePlayer(
+                                    controller: youtubeController!,
+                                    aspectRatio: 8 / 6,
+                                  ),
+                                ),
+                              )
+                            : Image.network(
+                                movie.mediumCoverImage!,
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: context.height * 0.6,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return ImageErrorPlaceholder(
+                                    height: context.height * 0.6,
+                                  );
+                                },
+                              ),
+
+                        if (!isPlay)
+                          Container(
+                            height: context.height * 0.6,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  AppColors.blackColor.withValues(alpha: 0.2),
+                                  AppColors.blackColor,
+                                ],
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                              ),
                             ),
                           ),
-                        ),
+
                         Positioned(
-                          top: context.height * 0.06,
+                          top: context.height * 0.065,
                           left: context.width * 0.04,
-                          child: InkWell(
-                            onTap: () => Navigator.pop(context),
-                            child: Image.asset(AppAssets.arrowBackIcon),
-                          ),
-                        ),
-                        Positioned(
-                          top: context.height * 0.06,
                           right: context.width * 0.04,
-                          child: Image.asset(AppAssets.saveIcon),
-                        ),
-                        Positioned(
-                          top: context.height * 0.3,
-                          right: context.width * 0.4,
-                          child: Image.asset(AppAssets.playImage),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: context.width * 0.04),
-                      child: Column(
-                        spacing: context.height * 0.02,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Text(
-                            movie.title ?? '',
-                            textAlign: TextAlign.center,
-                            style: AppStyles.bold24WhiteRoboto,
-                          ),
-                          Text(
-                            '${movie.year ?? ''}',
-                            textAlign: TextAlign.center,
-                            style: AppStyles.bold20LightGrayRoboto,
-                          ),
-                          CustomElevatedButton(
-                            backgroundColor: AppColors.redColor,
-                            verticalPadding: context.height * 0.015,
-                            onPressed: () async {
-                              final String urlString = movie.url ?? '';
-                              if (urlString.isNotEmpty) {
-                                final Uri url = Uri.parse(urlString);
-                                if (await canLaunchUrl(url)) {
-                                  await launchUrl(url, mode: LaunchMode.inAppWebView);
-                                }
-                              }
-                            },
-                            child: Text(
-                              'watch'.tr(),
-                              style: AppStyles.bold20WhiteRoboto,
-                            ),
-                          ),
-                          Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              StatChipWidget(
-                                colorContainer: AppColors.darkGrayColor,
-                                image: AppAssets.favoriteIcon,
-                                label: '${movie.likeCount ?? 0}',
+                              CustomBtn(
+                                isPlay: isPlay,
+                                onTap: () {
+                                  if (isPlay) {
+                                    closeBtn();
+                                  } else {
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                child: Icon(
+                                  isPlay
+                                      ? Icons.close
+                                      : Icons.arrow_back_ios_new,
+                                  color: AppColors.whiteColor,
+                                ),
                               ),
-                              StatChipWidget(
-                                colorContainer: AppColors.darkGrayColor,
-                                image: AppAssets.timeIcon,
-                                label: '${movie.runtime ?? 0}',
-                              ),
-                              StatChipWidget(
-                                colorContainer: AppColors.darkGrayColor,
-                                image: AppAssets.starIcon,
-                                label: '${movie.rating ?? 0.0}',
+
+                              CustomBtn(
+                                isPlay: isPlay,
+                                onTap: () {
+                                  isSaved = !isSaved;
+                                  setState(() {});
+                                },
+                                child: Icon(
+                                  size: context.width * 0.075,
+                                  Icons.bookmark_rounded,
+                                  color: isSaved
+                                      ? AppColors.yellowColor
+                                      : AppColors.whiteColor,
+                                ),
                               ),
                             ],
                           ),
-                          Text('screen_shots'.tr(),
-                            style: AppStyles.bold24WhiteRoboto,
+                        ),
+
+                        if (!isPlay &&
+                            movie.ytTrailerCode != null &&
+                            movie.ytTrailerCode!.isNotEmpty)
+                          Positioned(
+                            top: context.height * 0.28,
+                            child: InkWell(
+                              onTap: () {
+                                playTrailer(movie.ytTrailerCode!);
+                              },
+                              child: Image.asset(AppAssets.playImage),
+                            ),
                           ),
-                          ScreenShotWidget(
-                            image: movie.largeScreenshotImage1 ?? '',
-                          ),
-                          ScreenShotWidget(
-                            image: movie.largeScreenshotImage2 ?? '',
-                          ),
-                          ScreenShotWidget(
-                            image: movie.largeScreenshotImage3 ?? '',
-                          ),
-                          SimilarMovies(
-                            movieId: movie.id ?? 0,
-                          ),
-                        ],
+                      ],
+                    ),
+
+                    SafeArea(
+                      top: false,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: context.width * 0.04,
+                        ),
+                        child: Column(
+                          spacing: context.height * 0.05,
+                          children: [
+                            MovieDetailsUpSection(movie: movie),
+                            MovieScreenShot(
+                              screenshotImage1:
+                                  movie.mediumScreenshotImage1 ?? '',
+                              screenshotImage2:
+                                  movie.mediumScreenshotImage2 ?? '',
+                              screenshotImage3:
+                                  movie.mediumScreenshotImage3 ?? '',
+                            ),
+                            SimilarMovies(movieId: movie.id!),
+                            MovieSummary(summary: movie.descriptionFull ?? ''),
+                            MovieCast(castList: movie.cast),
+                            MovieGenres(genres: movie.genres),
+                            SizedBox(),
+                          ],
+                        ),
                       ),
                     ),
                   ],
                 ),
               );
             }
-            return SizedBox.shrink();
+            return const SizedBox();
           },
         ),
       ),
     );
+  }
+
+  void playTrailer(String trailerCode) {
+    if (trailerCode.isEmpty) return;
+
+    youtubeController = YoutubePlayerController.fromVideoId(
+      videoId: trailerCode,
+      autoPlay: true,
+      params: const YoutubePlayerParams(
+        showControls: true,
+        showFullscreenButton: true,
+      ),
+    );
+
+    setState(() {
+      isPlay = true;
+    });
+  }
+
+  void scrollListener() {
+    if (youtubeController?.value.playerState == PlayerState.playing) {
+      youtubeController?.pauseVideo();
+    }
+  }
+
+  void closeBtn() {
+    youtubeController?.close();
+    setState(() {
+      youtubeController = null;
+      isPlay = false;
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.removeListener(scrollListener);
+    scrollController.dispose();
+    youtubeController?.close();
+    super.dispose();
   }
 }

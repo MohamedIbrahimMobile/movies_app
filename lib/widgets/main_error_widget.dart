@@ -1,51 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
 
 class MainErrorWidget extends StatelessWidget {
-  final String errorMessage;
+  final String message;
   final VoidCallback onPressed;
 
   const MainErrorWidget({
     super.key,
-    required this.errorMessage,
+    required this.message,
     required this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Padding(
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: context.height * 0.02,
+      children: [
+        Text(message, style: AppStyles.reg16WhiteRoboto),
+        ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(
-              horizontal: context.width * 0.06,
-            ),
-            child: Column(
-              spacing: context.height * 0.04,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  errorMessage,
-                  textAlign: TextAlign.center,
-                  style: AppStyles.bold20WhiteRoboto,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.yellowColor,
-                  ),
-                  onPressed: onPressed,
-                  child: Text(
-                    'Try Again',
-                    style: AppStyles.bold20WhiteRoboto,
-                  ),
-                ),
-              ],
+              vertical: context.height * 0.015,
+              horizontal: context.width * 0.08,
             ),
           ),
+          child: Text('Try Again', style: AppStyles.reg16YellowRoboto),
         ),
-      ),
+      ],
     );
   }
 }

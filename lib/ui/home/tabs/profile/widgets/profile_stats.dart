@@ -16,61 +16,43 @@ class ProfileStats extends StatelessWidget {
         top: context.height * 0.030,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        spacing: context.width * 0.15,
         children: [
           Column(
+            spacing: context.height * 0.02,
             children: [
-              Container(
-                width: context.width * 0.24,
-                height: context.width * 0.22,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: ClipOval(
-                  child: Image.asset(
-                    AppAssets.avatarImage2,
-                    fit: BoxFit.cover,
-                  ),
+              CircleAvatar(
+                radius: 45,
+                child: Image.asset(
+                  AppAssets.avatarImage2,
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: context.height * 0.02,),
               Text(
                 'John Safwat',
-                style: AppStyles.bold20WhiteRoboto.copyWith(
-                  fontSize: 14,
-                ),
+                style: AppStyles.bold20WhiteRoboto.copyWith(fontSize: 14),
               ),
             ],
           ),
-          SizedBox(width: context.width * 0.15,),
           Column(
             children: [
-              Text(
-                '12',
-                style: AppStyles.bold24WhiteRoboto,
-              ),
-               SizedBox(height: context.height * 0.01,),
+              Text('12', style: AppStyles.bold24WhiteRoboto),
+              SizedBox(height: context.height * 0.01),
               Text(
                 'watchlist'.tr(),
-                style: AppStyles.bold20WhiteRoboto.copyWith(
-                  fontSize: 16,
-                ),
+                style: AppStyles.bold20WhiteRoboto.copyWith(fontSize: 16),
               ),
             ],
           ),
-          SizedBox(width: context.width * 0.18,),
           Column(
             children: [
-              Text(
-                '10',
-                style: AppStyles.bold24WhiteRoboto,
-              ),
-               SizedBox(height: context.height * 0.01,),
+              Text('10', style: AppStyles.bold24WhiteRoboto),
+              SizedBox(height: context.height * 0.01),
               Text(
                 'history'.tr(),
-                style: AppStyles.bold20WhiteRoboto.copyWith(
-                  fontSize: 16,
-                ),
+                style: AppStyles.bold20WhiteRoboto.copyWith(fontSize: 16),
               ),
             ],
           ),

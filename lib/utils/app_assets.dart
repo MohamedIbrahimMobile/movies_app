@@ -45,7 +45,7 @@ class AppAssets {
   static const String watchListImage = 'assets/images/watch_list_image.png';
   static const String availableNowText = 'assets/images/available_now_text.png';
   static const String watchNowText = 'assets/images/watch_new_text.png';
-  static const String samMendesImage = 'assets/images/Sam_Mendes_image.png';
+  static const String bgImageHomeTab = 'assets/images/bg_image_home_tab.png';
   static const String doctorStrangeImage =
       'assets/images/doctor_strange_image.png';
   static const String playImage = 'assets/images/play_image.png';

@@ -2,25 +2,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:movies_app/models/my_user.dart';
 
 class FirestoreService {
-  final FirebaseFirestore _firestore =
-      FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   CollectionReference<MyUser> get _usersCollection {
     return _firestore
         .collection(MyUser.collectionName)
         .withConverter<MyUser>(
-      fromFirestore: (snapshot, _) {
-        final data = snapshot.data();
+          fromFirestore: (snapshot, _) {
+            final data = snapshot.data();
 
-        if (data == null) {
-          throw Exception('User data is empty.');
-        }
-        return MyUser.fromFirestore(data);
-      },
-      toFirestore: (user, _) {
-        return user.toFirestore();
-      },
-    );
+            if (data == null) {
+              throw Exception('User data is empty.');
+            }
+            return MyUser.fromFirestore(data);
+          },
+          toFirestore: (user, _) {
+            return user.toFirestore();
+          },
+        );
   }
 
   Future<void> addUser(MyUser user) async {
@@ -28,8 +27,7 @@ class FirestoreService {
   }
 
   Future<MyUser?> getUser(String id) async {
-    final snapshot =
-    await _usersCollection.doc(id).get();
+    final snapshot = await _usersCollection.doc(id).get();
 
     return snapshot.data();
   }

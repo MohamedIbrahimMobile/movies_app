@@ -38,19 +38,12 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthBloc(
-        authRepository: AuthRepository(),
-      ),
+      create: (_) => AuthBloc(authRepository: AuthRepository()),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccess || state is GoogleLoginSuccess) {
-            DialogUtils.showSuccessToast(
-              message: 'logged_in_success'.tr(),
-            );
-            Navigator.pushReplacementNamed(
-              context,
-              AppRoutes.homeRouteName,
-            );
+            DialogUtils.showSuccessToast(message: 'logged_in_success'.tr());
+            Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
           }
           if (state is AuthError) {
             DialogUtils.showMessage(
@@ -68,25 +61,22 @@ class _LoginScreenState extends State<LoginScreen> {
             body: SafeArea(
               child: SingleChildScrollView(
                 keyboardDismissBehavior:
-                ScrollViewKeyboardDismissBehavior.onDrag,
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: context.width * 0.02,
+                    horizontal: context.width * 0.04,
                   ),
                   child: Form(
                     key: formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Image.asset(
                           AppAssets.loginImage,
-                          height: context.height * 0.3,
+                          height: context.height * 0.27,
                         ),
                         CustomTextField(
                           controller: emailController,
-                          prefixIcon: Image.asset(
-                            AppAssets.emailIcon,
-                          ),
+                          prefixIcon: Image.asset(AppAssets.emailIcon),
                           fillColor: AppColors.darkGrayColor,
                           fill: true,
                           hintText: 'email'.tr(),
@@ -105,14 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(
-                          height: context.height * 0.03,
-                        ),
+                        SizedBox(height: context.height * 0.03),
                         CustomTextField(
                           controller: passwordController,
-                          prefixIcon: Image.asset(
-                            AppAssets.passwordIcon,
-                          ),
+                          prefixIcon: Image.asset(AppAssets.passwordIcon),
                           suffixIcon: IconButton(
                             icon: Icon(
                               isPasswordObscured
@@ -155,11 +141,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: context.height * 0.025,
-                        ),
+                        SizedBox(height: context.height * 0.025),
                         CustomElevatedButton(
-                          verticalPadding: context.height * 0.017,
+                          verticalPadding: context.height * 0.014,
                           backgroundColor: AppColors.yellowColor,
                           onPressed: () {
                             if (isLoading) {
@@ -168,21 +152,26 @@ class _LoginScreenState extends State<LoginScreen> {
                             login(context);
                           },
                           child: isLoading
-                              ? const SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(
-                              color: AppColors.blackColor,
-                            ),
-                          )
-                              : Text(
-                            'login'.tr(),
-                            style: AppStyles.reg20BlackRoboto,
-                          ),
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  height: context.height * 0.035,
+                                  child: SizedBox(
+                                    height: context.height * 0.027,
+                                    width: context.width * 0.06,
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.blackColor,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'login'.tr(),
+                                    style: AppStyles.reg20BlackRoboto,
+                                  ),
+                                ),
                         ),
-                        SizedBox(
-                          height: context.height * 0.01,
-                        ),
+                        SizedBox(height: context.height * 0.01),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -204,9 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: context.height * 0.015,
-                        ),
+                        SizedBox(height: context.height * 0.015),
                         Row(
                           children: [
                             Expanded(
@@ -217,10 +204,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 endIndent: context.width * 0.04,
                               ),
                             ),
-                            Text(
-                              'or'.tr(),
-                              style: AppStyles.reg15YellowRoboto,
-                            ),
+                            Text('or'.tr(), style: AppStyles.reg15YellowRoboto),
                             Expanded(
                               child: Divider(
                                 color: AppColors.yellowColor,
@@ -231,27 +215,21 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: context.height * 0.04,
-                        ),
+                        SizedBox(height: context.height * 0.04),
                         CustomElevatedButton(
-                          verticalPadding: context.height * 0.017,
+                          verticalPadding: context.height * 0.014,
                           backgroundColor: AppColors.yellowColor,
                           onPressed: () {
                             if (isLoading) {
                               return;
                             }
-                            context.read<AuthBloc>().add(
-                              GoogleLoginEvent(),
-                            );
+                            context.read<AuthBloc>().add(GoogleLoginEvent());
                           },
                           child: Row(
                             spacing: context.width * 0.03,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset(
-                                AppAssets.googleIcon,
-                              ),
+                              Image.asset(AppAssets.googleIcon),
                               Text(
                                 'login_google'.tr(),
                                 style: AppStyles.reg16BlackRoboto,
@@ -259,10 +237,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(
-                          height: context.height * 0.04,
-                        ),
+                        SizedBox(height: context.height * 0.04),
                         const LanguageToggleSwitch(),
+                        SizedBox(height: context.height * 0.04),
                       ],
                     ),
                   ),

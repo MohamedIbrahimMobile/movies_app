@@ -15,7 +15,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   int currentIndex = 0;
   final CarouselSliderController _carouselController =
-  CarouselSliderController();
+      CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {

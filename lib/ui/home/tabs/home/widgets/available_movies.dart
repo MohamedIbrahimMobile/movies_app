@@ -1,92 +1,116 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/api/api_manager.dart';
+import 'package:movies_app/api/model/movie.dart';
+import 'package:movies_app/ui/home/tabs/home/widgets/movie_card.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
-import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
+import 'package:movies_app/widgets/main_error_widget.dart';
+import 'package:movies_app/widgets/main_loading_widget.dart';
 
-import '../../../../../utils/app_routes.dart';
+typedef OnPageChanged = dynamic Function(int, CarouselPageChangedReason)?;
 
-class AvailableMovies extends StatelessWidget {
+class AvailableMovies extends StatefulWidget {
   const AvailableMovies({super.key});
 
   @override
+  State<AvailableMovies> createState() => _AvailableMoviesState();
+}
+
+class _AvailableMoviesState extends State<AvailableMovies> {
+  late Future<List<Movie>> movies;
+  int currentImageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    movies = ApiManager.getMovies(sortBy: 'date_added');
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: Image.asset(
-            AppAssets.availableNowText,
-            height: context.height * 0.08,
-          ),
-        ),
-        CarouselSlider.builder(
-          itemCount: 5,
-          itemBuilder: (context, index, realIndex) {
+    return SizedBox(
+      height: context.height * 0.64,
+      child: FutureBuilder<List<Movie>>(
+        future: movies,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return MainLoadingWidget();
+          } else if (snapshot.hasError) {
+            return MainErrorWidget(
+              message: snapshot.error.toString(),
+              onPressed: () {
+                movies = ApiManager.getMovies(sortBy: 'date_added');
+                setState(() {});
+              },
+            );
+          } else {
+            List<Movie> moviesList = snapshot.data!;
             return Stack(
               children: [
-                Center(
-                  child: InkWell(
-                    onTap: (){
-                      Navigator.pushNamed(
-                        context,
-                        AppRoutes.movieDetailsScreenRouteName,
-                      );
-                    }
-                    ,child: ClipRRect(
-                      borderRadius: BorderRadius.circular(
-                        context.width * 0.02,
-                      ),
-                      child: Image.asset(
-                        AppAssets.samMendesImage,
-                        height: context.height * 0.30,
-                        width: context.width * 0.52,
-                        fit: BoxFit.cover,
-                      ),
+                Image.network(
+                  moviesList[currentImageIndex].mediumCoverImage!,
+                  fit: BoxFit.fill,
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        AppColors.blackColor.withValues(alpha: 0.8),
+                        AppColors.blackColor.withValues(alpha: 0.6),
+                        AppColors.blackColor,
+                      ],
+                      begin: AlignmentGeometry.topCenter,
+                      end: AlignmentGeometry.bottomCenter,
                     ),
                   ),
                 ),
-                Positioned(
-                  top: context.height * 0.01,
-                  left: context.width * 0.06,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.width * 0.02,
-                      vertical: context.height * 0.006,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.darkGrayColor,
-                      borderRadius: BorderRadius.circular(
-                        context.width * 0.03,
+                SafeArea(
+                  bottom: false,
+                  child: Column(
+                    spacing: context.height * 0.015,
+                    children: [
+                      Image.asset(
+                        AppAssets.availableNowText,
+                        height: context.height * 0.08,
                       ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '7.7',
-                          style: AppStyles.reg14YellowRoboto,
+                      CarouselSlider.builder(
+                        itemCount: moviesList.length,
+                        itemBuilder: (context, index, realIndex) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: context.width * 0.01,
+                            ),
+                            child: MovieCard(movie: moviesList[index]),
+                          );
+                        },
+                        options: CarouselOptions(
+                          onPageChanged: (index, reason) {
+                            setState(() {
+                              currentImageIndex = index;
+                            });
+                          },
+                          height: context.height * 0.33,
+                          viewportFraction: context.width * 0.00142,
+                          enlargeCenterPage: true,
+                          enlargeFactor: context.width * 0.0008,
                         ),
-                        Icon(
-                          Icons.star,
-                          color: AppColors.yellowColor,
-                          size: context.height * 0.018,
-                        ),
-                      ],
-                    ),
+                      ),
+                      Image.asset(
+                        AppAssets.watchNowText,
+                        height: context.height * 0.15,
+                      ),
+                    ],
                   ),
                 ),
               ],
             );
-          },
-          options: CarouselOptions(
-            height: context.height * 0.31,
-            viewportFraction: 0.60,
-            enlargeCenterPage: true,
-            enlargeFactor: 0.28,
-          ),
-        ),
-      ],
+          }
+        },
+      ),
     );
   }
 }

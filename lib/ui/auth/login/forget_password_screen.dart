@@ -33,15 +33,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthBloc(
-        authRepository: AuthRepository(),
-      ),
+      create: (_) => AuthBloc(authRepository: AuthRepository()),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is ForgetPasswordSuccess) {
-            DialogUtils.showSuccessToast(
-              message: 'password_reset_sent'.tr(),
-            );
+            DialogUtils.showSuccessToast(message: 'password_reset_sent'.tr());
             Navigator.pop(context);
           }
           if (state is AuthError) {
@@ -67,7 +63,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             body: SafeArea(
               child: SingleChildScrollView(
                 keyboardDismissBehavior:
-                ScrollViewKeyboardDismissBehavior.onDrag,
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: context.width * 0.02,
@@ -77,19 +73,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        Image.asset(
-                          AppAssets.forgetPasswordImage,
-                        ),
-                        SizedBox(
-                          height: context.height * 0.04,
-                        ),
+                        Image.asset(AppAssets.forgetPasswordImage),
+                        SizedBox(height: context.height * 0.04),
                         CustomTextField(
                           controller: emailController,
                           fillColor: AppColors.darkGrayColor,
                           fill: true,
-                          prefixIcon: Image.asset(
-                            AppAssets.emailIcon,
-                          ),
+                          prefixIcon: Image.asset(AppAssets.emailIcon),
                           hintText: 'email'.tr(),
                           hintStyle: AppStyles.reg16WhiteRoboto,
                           keyboardType: TextInputType.emailAddress,
@@ -100,34 +90,34 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             return null;
                           },
                         ),
-                        SizedBox(
-                          height: context.height * 0.03,
-                        ),
+                        SizedBox(height: context.height * 0.03),
                         CustomElevatedButton(
                           verticalPadding: context.height * 0.013,
                           backgroundColor: AppColors.yellowColor,
                           onPressed: isLoading
                               ? () {}
                               : () {
-                            if (!formKey.currentState!.validate()) {
-                              return;
-                            }
-                            context.read<AuthBloc>().add(
-                              ForgetPasswordEvent(
-                                email: emailController.text.trim(),
-                              ),
-                            );
-                          },
-                          child: isLoading ? SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(
-                              color: AppColors.blackColor,
-                            ),
-                          )
-                              : Text('verify'.tr(),
-                            style: AppStyles.reg20BlackRoboto,
-                          ),
+                                  if (!formKey.currentState!.validate()) {
+                                    return;
+                                  }
+                                  context.read<AuthBloc>().add(
+                                    ForgetPasswordEvent(
+                                      email: emailController.text.trim(),
+                                    ),
+                                  );
+                                },
+                          child: isLoading
+                              ? SizedBox(
+                                  width: 22,
+                                  height: 22,
+                                  child: CircularProgressIndicator(
+                                    color: AppColors.blackColor,
+                                  ),
+                                )
+                              : Text(
+                                  'verify'.tr(),
+                                  style: AppStyles.reg20BlackRoboto,
+                                ),
                         ),
                       ],
                     ),

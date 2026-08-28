@@ -20,9 +20,7 @@ class _ProfileWatchListState extends State<ProfileWatchList> {
     return Expanded(
       child: Column(
         children: [
-          SizedBox(
-            height: context.height * 0.025,
-          ),
+          SizedBox(height: context.height * 0.025),
           Row(
             children: [
               Expanded(
@@ -57,11 +55,11 @@ class _ProfileWatchListState extends State<ProfileWatchList> {
   }
 
   Widget _buildTab(
-      BuildContext context, {
-        required IconData icon,
-        required String title,
-        required int index,
-      }) {
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required int index,
+  }) {
     final bool isSelected = selectedIndex == index;
     return GestureDetector(
       onTap: () {
@@ -76,12 +74,9 @@ class _ProfileWatchListState extends State<ProfileWatchList> {
             color: isSelected ? AppColors.yellowColor : AppColors.whiteColor,
             size: context.height * 0.028,
           ),
-          SizedBox(height: context.height * 0.005,),
-          Text(
-            title,
-            style: AppStyles.reg14WhiteRoboto,
-          ),
-          SizedBox(height: context.height * 0.008,),
+          SizedBox(height: context.height * 0.005),
+          Text(title, style: AppStyles.reg14WhiteRoboto),
+          SizedBox(height: context.height * 0.008),
           Container(
             height: context.height * 0.003,
             width: double.infinity,

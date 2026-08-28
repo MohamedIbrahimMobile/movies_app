@@ -18,14 +18,9 @@ class DialogUtils {
           content: Row(
             spacing: context.width * 0.04,
             children: [
-              CircularProgressIndicator(
-                color: AppColors.yellowColor,
-              ),
+              CircularProgressIndicator(color: AppColors.yellowColor),
               Expanded(
-                child: Text(
-                  loadingText,
-                  style: AppStyles.reg16WhiteRoboto,
-                ),
+                child: Text(loadingText, style: AppStyles.reg16WhiteRoboto),
               ),
             ],
           ),
@@ -34,9 +29,7 @@ class DialogUtils {
     );
   }
 
-  static void hideLoading({
-    required BuildContext context,
-  }) {
+  static void hideLoading({required BuildContext context}) {
     Navigator.pop(context);
   }
 
@@ -58,10 +51,7 @@ class DialogUtils {
             Navigator.pop(context);
             posAction?.call();
           },
-          child: Text(
-            posActionName,
-            style: AppStyles.reg16YellowRoboto,
-          ),
+          child: Text(posActionName, style: AppStyles.reg16YellowRoboto),
         ),
       );
     }
@@ -73,10 +63,7 @@ class DialogUtils {
             Navigator.pop(context);
             negAction?.call();
           },
-          child: Text(
-            negActionName,
-            style: AppStyles.reg16WhiteRoboto,
-          ),
+          child: Text(negActionName, style: AppStyles.reg16WhiteRoboto),
         ),
       );
     }
@@ -87,24 +74,16 @@ class DialogUtils {
         return AlertDialog(
           backgroundColor: AppColors.darkGrayColor,
           title: title.isNotEmpty
-              ? Text(
-            title,
-            style: AppStyles.reg20WhiteRoboto,
-          )
+              ? Text(title, style: AppStyles.reg20WhiteRoboto)
               : null,
-          content: Text(
-            message,
-            style: AppStyles.reg16WhiteRoboto,
-          ),
+          content: Text(message, style: AppStyles.reg16WhiteRoboto),
           actions: actions,
         );
       },
     );
   }
 
-  static void showSuccessToast({
-    required String message,
-  }) {
+  static void showSuccessToast({required String message}) {
     Fluttertoast.showToast(
       msg: message,
       toastLength: Toast.LENGTH_SHORT,
