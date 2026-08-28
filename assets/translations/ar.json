@@ -1,6 +1,5 @@
 {
   "app_name": "Movies",
-
   "onboarding_title_1": "اعثر على فيلمك المفضل القادم هنا",
   "onboarding_desc_1": "احصل على إمكانية الوصول إلى مكتبة ضخمة من الأفلام التي تناسب جميع الأذواق.",
   "onboarding_title_2": "اكتشف الأفلام",
@@ -16,23 +15,19 @@
   "next": "التالي",
   "back": "رجوع",
   "finish": "إنهاء",
-
   "login": "تسجيل الدخول",
   "register": "إنشاء حساب",
   "logout": "تسجيل الخروج",
   "avatar": "الصورة الشخصية",
-
   "name": "الاسم",
   "email": "البريد الإلكتروني",
   "password": "كلمة المرور",
   "phone": "الهاتف",
   "confirm_password": "تأكيد كلمة المرور",
   "phone_number": "رقم الهاتف",
-
   "create_account": "إنشاء حساب",
   "create": "أنشئ واحدًا",
   "or": "أو",
-
   "forgot_password": "هل نسيت كلمة المرور؟",
   "forget_password_title": "نسيت كلمة المرور",
   "reset_password": "إعادة تعيين كلمة المرور",
@@ -40,37 +35,29 @@
   "already_have_account": "لديك حساب بالفعل؟",
   "login_google": "تسجيل الدخول باستخدام جوجل",
   "verify": "التحقق من البريد الإلكتروني",
-
   "home": "الرئيسية",
   "search": "البحث",
   "browse": "تصفح",
   "profile": "الملف الشخصي",
-
   "update_profile": "تعديل الملف الشخصي",
   "watchlist": "قائمة المشاهدة",
   "history": "السجل",
   "edit_profile": "تعديل الملف الشخصي",
   "exit": "خروج",
-
   "movie_details": "تفاصيل الفيلم",
   "suggestions": "اقتراحات",
   "similar": "مشابه",
-
   "save": "حفظ",
   "cancel": "إلغاء",
   "delete": "حذف",
   "ok": "حسناً",
-
   "English": "الإنجليزية",
   "Arabic": "العربية",
-
   "delete_account": "حذف الحساب",
   "update_data": "تحديث البيانات",
   "pick_avatar": "اختيار الصورة الشخصية",
-
-  "watch" : "شاهد",
-  "screen_shots" : "لقطات الشاشة",
-
+  "watch": "شاهد",
+  "screen_shots": "لقطات الشاشة",
   "profile_updated_success": "تم تحديث البيانات بنجاح",
   "password_reset_sent": "تم إرسال رابط إعادة ضبط كلمة السر بنجاح",
   "logged_in_success": "تم تسجيل الدخول بنجاح",
@@ -78,7 +65,6 @@
   "account_deleted_success": "تم حذف الحساب بنجاح",
   "delete_account_title": "حذف الحساب",
   "delete_account_confirm_message": "هل أنت تأكد من أنك تريد حذف حسابك؟",
-
   "please_enter_email": "يرجى إدخال البريد الإلكتروني",
   "please_enter_valid_email": "يرجى إدخال بريد إلكتروني صحيح",
   "please_enter_password": "يرجى إدخال كلمة المرور",
@@ -88,5 +74,24 @@
   "passwords_dont_match": "كلمتا المرور غير متطابقتين",
   "please_enter_phone_number": "يرجى إدخال رقم الهاتف",
   "please_enter_numbers_only": "يرجى إدخال أرقام فقط",
-  "invalid_phone_number": "يرجى إدخال رقم هاتف صحيح (مثال: 01012345678)"
+  "invalid_phone_number": "يرجى إدخال رقم هاتف صحيح (مثال: 01012345678)",
+  "see_more": "عرض المزيد",
+  "Action": "أكشن",
+  "Adventure": "مغامرة",
+  "Animation": "رسوم متحركة",
+  "Comedy": "كوميديا",
+  "Crime": "جريمة",
+  "Documentary": "وثائقي",
+  "Drama": "دراما",
+  "Fantasy": "فانتازيا",
+  "Music": "موسيقى",
+  "Musical": "استعراضي",
+  "Mystery": "غموض",
+  "Romance": "رومانسي",
+  "Sci-Fi": "خيال علمي",
+  "Sport": "رياضة",
+  "Thriller": "إثارة",
+  "summary": "الملخص",
+  "cast": "طاقم التمثيل",
+  "genres": "الأنواع"
 }

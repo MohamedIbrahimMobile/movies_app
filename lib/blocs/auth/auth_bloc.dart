@@ -7,9 +7,7 @@ import 'package:movies_app/data/repositories/auth_repository.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
 
-  AuthBloc({
-    required this.authRepository,
-  }) : super(AuthInitial()) {
+  AuthBloc({required this.authRepository}) : super(AuthInitial()) {
     on<RegisterEvent>(_onRegister);
     on<LoginEvent>(_onLogin);
     on<GoogleLoginEvent>(_onGoogleLogin);
@@ -19,10 +17,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<DeleteAccountEvent>(_onDeleteAccount);
   }
 
-  Future<void> _onRegister(
-      RegisterEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+  Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
     try {
@@ -36,44 +31,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       emit(RegisterSuccess());
     } on FirebaseAuthException catch (e) {
-      emit(
-        AuthError(
-          e.message ?? 'Registration failed.',
-        ),
-      );
+      emit(AuthError(e.message ?? 'Registration failed.'));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
   }
 
-  Future<void> _onLogin(
-      LoginEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+  Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
     try {
-      await authRepository.login(
-        email: event.email,
-        password: event.password,
-      );
+      await authRepository.login(email: event.email, password: event.password);
 
       emit(LoginSuccess());
     } on FirebaseAuthException catch (e) {
-      emit(
-        AuthError(
-          e.message ?? 'Login failed.',
-        ),
-      );
+      emit(AuthError(e.message ?? 'Login failed.'));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
   }
 
   Future<void> _onGoogleLogin(
-      GoogleLoginEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+    GoogleLoginEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
 
     try {
@@ -81,55 +62,40 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       emit(GoogleLoginSuccess());
     } on FirebaseAuthException catch (e) {
-      emit(
-        AuthError(
-          e.message ?? 'Google login failed.',
-        ),
-      );
+      emit(AuthError(e.message ?? 'Google login failed.'));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
   }
 
   Future<void> _onForgetPassword(
-      ForgetPasswordEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+    ForgetPasswordEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
 
     try {
-      await authRepository.sendPasswordResetEmail(
-        email: event.email,
-      );
+      await authRepository.sendPasswordResetEmail(email: event.email);
 
       emit(ForgetPasswordSuccess());
     } on FirebaseAuthException catch (e) {
-      emit(
-        AuthError(
-          e.message ?? 'Something went wrong.',
-        ),
-      );
+      emit(AuthError(e.message ?? 'Something went wrong.'));
     } catch (e) {
       emit(AuthError(e.toString()));
     }
   }
 
   Future<void> _onLoadProfile(
-      LoadProfileEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+    LoadProfileEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
 
     try {
-      final user =
-      await authRepository.getCurrentUserProfile();
+      final user = await authRepository.getCurrentUserProfile();
 
       if (user == null) {
-        emit(
-          const AuthError(
-            'User data not found.',
-          ),
-        );
+        emit(const AuthError('User data not found.'));
         return;
       }
 
@@ -140,9 +106,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onUpdateProfile(
-      UpdateProfileEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+    UpdateProfileEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
 
     try {
@@ -159,9 +125,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onDeleteAccount(
-      DeleteAccountEvent event,
-      Emitter<AuthState> emit,
-      ) async {
+    DeleteAccountEvent event,
+    Emitter<AuthState> emit,
+  ) async {
     emit(AuthLoading());
 
     try {
@@ -169,11 +135,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
       emit(DeleteAccountSuccess());
     } on FirebaseAuthException catch (e) {
-      emit(
-        AuthError(
-          e.message ?? 'Something went wrong.',
-        ),
-      );
+      emit(AuthError(e.message ?? 'Something went wrong.'));
     } catch (e) {
       emit(AuthError(e.toString()));
     }

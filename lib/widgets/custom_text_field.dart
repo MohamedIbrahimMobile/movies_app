@@ -44,8 +44,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fieldRadius = radius ?? 15;
-    final fieldBorderColor =
-        borderColor ?? AppColors.darkGrayColor;
+    final fieldBorderColor = borderColor ?? AppColors.darkGrayColor;
 
     return TextFormField(
       decoration: InputDecoration(
@@ -90,10 +89,7 @@ class CustomTextField extends StatelessWidget {
   }) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(radius),
-      borderSide: BorderSide(
-        color: borderColor,
-        width: 2,
-      ),
+      borderSide: BorderSide(color: borderColor, width: 2),
     );
   }
 }

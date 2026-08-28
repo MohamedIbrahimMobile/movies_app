@@ -53,9 +53,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthBloc(
-        authRepository: AuthRepository(),
-      )..add(LoadProfileEvent()),
+      create: (_) =>
+          AuthBloc(authRepository: AuthRepository())..add(LoadProfileEvent()),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is ProfileLoaded) {
@@ -82,7 +81,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             Navigator.pushNamedAndRemoveUntil(
               context,
               AppRoutes.loginRouteName,
-                  (route) => false,
+              (route) => false,
             );
           }
           if (state is AuthError) {
@@ -108,95 +107,96 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             ),
             body: isLoading
                 ? const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.yellowColor,
-              ),
-            )
-                : Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: context.width * 0.037,
-              ),
-              child: SingleChildScrollView(
-                keyboardDismissBehavior:
-                ScrollViewKeyboardDismissBehavior.onDrag,
-                child: Column(
-                  spacing: context.height * 0.024,
-                  children: [
-                    GestureDetector(
-                      onTap: buildBottomSheet,
-                      child: Container(
-                        margin: EdgeInsets.only(
-                          top: context.height * 0.043,
-                          bottom: context.height * 0.017,
-                        ),
-                        width: context.width * 0.4,
-                        height: context.height * 0.18,
-                        child: Image.asset(
-                          avatarImageList[selectedIndex],
-                          fit: BoxFit.fill,
-                        ),
-                      ),
+                    child: CircularProgressIndicator(
+                      color: AppColors.yellowColor,
                     ),
-                    Form(
-                      key: formKey,
+                  )
+                : Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: context.width * 0.037,
+                    ),
+                    child: SingleChildScrollView(
+                      keyboardDismissBehavior:
+                          ScrollViewKeyboardDismissBehavior.onDrag,
                       child: Column(
                         spacing: context.height * 0.024,
                         children: [
-                          CustomTextField(
-                            controller: nameController,
-                            hintText: 'name'.tr(),
-                            prefixIcon: Image.asset(
-                              AppAssets.personIcon,
-                              color: AppColors.whiteColor,
+                          GestureDetector(
+                            onTap: buildBottomSheet,
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                top: context.height * 0.043,
+                                bottom: context.height * 0.017,
+                              ),
+                              width: context.width * 0.4,
+                              height: context.height * 0.18,
+                              child: Image.asset(
+                                avatarImageList[selectedIndex],
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            validator: (text) {
-                              if (text == null || text.trim().isEmpty) {
-                                return 'please_enter_name'.tr();
-                              }
-                              return null;
-                            },
                           ),
-                          CustomTextField(
-                            controller: phoneController,
-                            hintText: 'phone_number'.tr(),
-                            prefixIcon: Image.asset(
-                              AppAssets.phoneIcon,
-                              color: AppColors.whiteColor,
+                          Form(
+                            key: formKey,
+                            child: Column(
+                              spacing: context.height * 0.024,
+                              children: [
+                                CustomTextField(
+                                  controller: nameController,
+                                  hintText: 'name'.tr(),
+                                  prefixIcon: Image.asset(
+                                    AppAssets.personIcon,
+                                    color: AppColors.whiteColor,
+                                  ),
+                                  validator: (text) {
+                                    if (text == null || text.trim().isEmpty) {
+                                      return 'please_enter_name'.tr();
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                CustomTextField(
+                                  controller: phoneController,
+                                  hintText: 'phone_number'.tr(),
+                                  prefixIcon: Image.asset(
+                                    AppAssets.phoneIcon,
+                                    color: AppColors.whiteColor,
+                                  ),
+                                  keyboardType: TextInputType.phone,
+                                  validator: (text) {
+                                    if (text == null || text.trim().isEmpty) {
+                                      return 'please_enter_phone_number'.tr();
+                                    }
+                                    final phoneValid = RegExp(r'^[0-9]+$')
+                                        .hasMatch(text.trim());
+                                    if (!phoneValid) {
+                                      return 'please_enter_numbers_only'.tr();
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ],
                             ),
-                            keyboardType: TextInputType.phone,
-                            validator: (text) {
-                              if (text == null || text.trim().isEmpty) {
-                                return 'please_enter_phone_number'.tr();
-                              }
-                              final phoneValid =
-                              RegExp(r'^[0-9]+$').hasMatch(text.trim());
-                              if (!phoneValid) {
-                                return 'please_enter_numbers_only'.tr();
-                              }
-                              return null;
-                            },
+                          ),
+                          Align(
+                            alignment: AlignmentDirectional.centerStart,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRoutes.forgetPasswordRouteName,
+                                );
+                              },
+                              child: Text(
+                                'reset_password'.tr(),
+                                style: AppStyles.reg20WhiteRoboto,
+                              ),
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    Align(
-                      alignment: AlignmentDirectional.centerStart,
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            AppRoutes.forgetPasswordRouteName,
-                          );
-                        },
-                        child: Text('reset_password'.tr(),
-                          style: AppStyles.reg20WhiteRoboto,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  ),
             bottomNavigationBar: SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(
@@ -215,9 +215,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         onPressed: isUpdating
                             ? () {}
                             : () {
-                          confirmDelete(context);
-                        },
-                        child: Text('delete_account'.tr(),
+                                confirmDelete(context);
+                              },
+                        child: Text(
+                          'delete_account'.tr(),
                           style: AppStyles.reg16WhiteRoboto,
                         ),
                       ),
@@ -231,18 +232,20 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         onPressed: isUpdating
                             ? () {}
                             : () {
-                          updateAccount(context);
-                        },
-                        child: isUpdating ? SizedBox(
-                          width: 22,
-                          height: 22,
-                          child: CircularProgressIndicator(
-                            color: AppColors.blackColor,
-                          ),
-                        )
-                            : Text('update_data'.tr(),
-                          style: AppStyles.reg16BlackRoboto,
-                        ),
+                                updateAccount(context);
+                              },
+                        child: isUpdating
+                            ? SizedBox(
+                                width: 22,
+                                height: 22,
+                                child: CircularProgressIndicator(
+                                  color: AppColors.blackColor,
+                                ),
+                              )
+                            : Text(
+                                'update_data'.tr(),
+                                style: AppStyles.reg16BlackRoboto,
+                              ),
                       ),
                     ),
                   ],
@@ -262,9 +265,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       message: 'delete_account_confirm_message'.tr(),
       posActionName: 'delete'.tr(),
       posAction: () {
-        innerContext.read<AuthBloc>().add(
-          DeleteAccountEvent(),
-        );
+        innerContext.read<AuthBloc>().add(DeleteAccountEvent());
       },
       negActionName: 'cancel'.tr(),
     );
@@ -318,9 +319,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       setState(() {
                         selectedIndex = index;
                       });
-                      Navigator.pop(
-                        bottomSheetContext,
-                      );
+                      Navigator.pop(bottomSheetContext);
                     },
                   );
                 },

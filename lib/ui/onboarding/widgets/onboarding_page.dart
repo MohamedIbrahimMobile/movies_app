@@ -48,61 +48,65 @@ class OnboardingPage extends StatelessWidget {
               padding: EdgeInsets.only(
                 left: context.width * 0.05,
                 right: context.width * 0.05,
-                top: context.height * 0.03,
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    item.titleKey.tr(),
-                    style: AppStyles.bold24WhiteInter.copyWith(
-                      decoration: TextDecoration.none,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: context.height * 0.02,),
-                  if (item.descriptionKey != null) ...[
+              child: SafeArea(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
                     Text(
-                      item.descriptionKey!.tr(),
-                      style: AppStyles.reg20White60Inter.copyWith(
+                      item.titleKey.tr(),
+                      style: AppStyles.bold24WhiteInter.copyWith(
                         decoration: TextDecoration.none,
-                        height: 1.2,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: context.height * 0.02,),
-                  ] else
-                    SizedBox(
-                      height: context.height * 0.01,
-                    ),
-                  for (var button in item.buttons)
-                    Padding(
-                      padding: EdgeInsets.only(
-                        bottom: context.height * 0.01,
+                    SizedBox(height: context.height * 0.02),
+                    if (item.descriptionKey != null) ...[
+                      Text(
+                        item.descriptionKey!.tr(),
+                        style: AppStyles.reg20White60Inter.copyWith(
+                          decoration: TextDecoration.none,
+                          height: 1.2,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: CustomElevatedButton(
-                          onPressed: button.isFinish ? onFinish
-                              : button.isPrimary ? onNext
-                              : onBack,
-                          backgroundColor: button.isPrimary ? AppColors.yellowColor
-                              : AppColors.transparent,
-                          radius: 15,
-                          verticalPadding: context.height * 0.01716,
-                          sideColor: button.isPrimary ? AppColors.transparent
-                              : AppColors.yellowColor,
-                          child: Text(
-                            button.textKey.tr(),
-                            style: (button.isPrimary ? AppStyles.simi20BlackInter
-                                : AppStyles.simi20YellowInter).copyWith(
-                              decoration: TextDecoration.none,
+                      SizedBox(height: context.height * 0.02),
+                    ] else
+                      SizedBox(height: context.height * 0.01),
+                    for (var button in item.buttons)
+                      Padding(
+                        padding: EdgeInsets.only(bottom: context.height * 0.01),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: CustomElevatedButton(
+                            onPressed: button.isFinish
+                                ? onFinish
+                                : button.isPrimary
+                                ? onNext
+                                : onBack,
+                            backgroundColor: button.isPrimary
+                                ? AppColors.yellowColor
+                                : AppColors.transparent,
+                            radius: 15,
+                            verticalPadding: context.height * 0.01716,
+                            sideColor: button.isPrimary
+                                ? AppColors.transparent
+                                : AppColors.yellowColor,
+                            child: Text(
+                              button.textKey.tr(),
+                              style:
+                                  (button.isPrimary
+                                          ? AppStyles.simi20BlackInter
+                                          : AppStyles.simi20YellowInter)
+                                      .copyWith(
+                                        decoration: TextDecoration.none,
+                                      ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

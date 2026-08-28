@@ -4,14 +4,11 @@ import 'package:movies_app/models/my_user.dart';
 import 'package:movies_app/services/firestore_service.dart';
 
 class AuthRepository {
-  final FirebaseAuth _firebaseAuth =
-      FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  final FirestoreService _firestoreService =
-  FirestoreService();
+  final FirestoreService _firestoreService = FirestoreService();
 
-  final GoogleSignIn _googleSignIn =
-      GoogleSignIn.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
   Future<void> register({
     required String name,
@@ -20,8 +17,7 @@ class AuthRepository {
     required String phone,
     required int avatarIndex,
   }) async {
-    final credential =
-    await _firebaseAuth.createUserWithEmailAndPassword(
+    final credential = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -29,9 +25,7 @@ class AuthRepository {
     final firebaseUser = credential.user;
 
     if (firebaseUser == null) {
-      throw Exception(
-        'Registration failed, please try again.',
-      );
+      throw Exception('Registration failed, please try again.');
     }
 
     final newUser = MyUser(
@@ -45,10 +39,7 @@ class AuthRepository {
     await _firestoreService.addUser(newUser);
   }
 
-  Future<void> login({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> login({required String email, required String password}) async {
     await _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
@@ -58,34 +49,23 @@ class AuthRepository {
   Future<void> loginWithGoogle() async {
     await _googleSignIn.initialize();
 
-    final googleUser =
-    await _googleSignIn.authenticate();
+    final googleUser = await _googleSignIn.authenticate();
 
-    final googleAuthentication =
-        googleUser.authentication;
+    final googleAuthentication = googleUser.authentication;
 
-    final credential =
-    GoogleAuthProvider.credential(
+    final credential = GoogleAuthProvider.credential(
       idToken: googleAuthentication.idToken,
     );
 
-    final userCredential =
-    await _firebaseAuth.signInWithCredential(
-      credential,
-    );
+    final userCredential = await _firebaseAuth.signInWithCredential(credential);
 
     final firebaseUser = userCredential.user;
 
     if (firebaseUser == null) {
-      throw Exception(
-        'Google login failed.',
-      );
+      throw Exception('Google login failed.');
     }
 
-    final existingUser =
-    await _firestoreService.getUser(
-      firebaseUser.uid,
-    );
+    final existingUser = await _firestoreService.getUser(firebaseUser.uid);
 
     if (existingUser == null) {
       final newUser = MyUser(
@@ -96,31 +76,22 @@ class AuthRepository {
         avatarIndex: 0,
       );
 
-      await _firestoreService.addUser(
-        newUser,
-      );
+      await _firestoreService.addUser(newUser);
     }
   }
 
-  Future<void> sendPasswordResetEmail({
-    required String email,
-  }) async {
-    await _firebaseAuth.sendPasswordResetEmail(
-      email: email,
-    );
+  Future<void> sendPasswordResetEmail({required String email}) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
   }
 
   Future<MyUser?> getCurrentUserProfile() async {
-    final firebaseUser =
-        _firebaseAuth.currentUser;
+    final firebaseUser = _firebaseAuth.currentUser;
 
     if (firebaseUser == null) {
       return null;
     }
 
-    return await _firestoreService.getUser(
-      firebaseUser.uid,
-    );
+    return await _firestoreService.getUser(firebaseUser.uid);
   }
 
   Future<void> updateProfile({
@@ -128,48 +99,33 @@ class AuthRepository {
     required String phone,
     required int avatarIndex,
   }) async {
-    final firebaseUser =
-        _firebaseAuth.currentUser;
+    final firebaseUser = _firebaseAuth.currentUser;
 
     if (firebaseUser == null) {
-      throw Exception(
-        'User is not logged in.',
-      );
+      throw Exception('User is not logged in.');
     }
 
-    final currentUser =
-    await _firestoreService.getUser(
-      firebaseUser.uid,
-    );
+    final currentUser = await _firestoreService.getUser(firebaseUser.uid);
 
     if (currentUser == null) {
-      throw Exception(
-        'User data not found.',
-      );
+      throw Exception('User data not found.');
     }
 
     currentUser.name = name;
     currentUser.phone = phone;
     currentUser.avatarIndex = avatarIndex;
 
-    await _firestoreService.updateUser(
-      currentUser,
-    );
+    await _firestoreService.updateUser(currentUser);
   }
 
   Future<void> deleteAccount() async {
-    final firebaseUser =
-        _firebaseAuth.currentUser;
+    final firebaseUser = _firebaseAuth.currentUser;
 
     if (firebaseUser == null) {
-      throw Exception(
-        'User is not logged in.',
-      );
+      throw Exception('User is not logged in.');
     }
 
-    await _firestoreService.deleteUser(
-      firebaseUser.uid,
-    );
+    await _firestoreService.deleteUser(firebaseUser.uid);
 
     await firebaseUser.delete();
 

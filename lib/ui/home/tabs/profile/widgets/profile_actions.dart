@@ -24,16 +24,17 @@ class ProfileActions extends StatelessWidget {
               height: context.height * 0.055,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.updateProfileRouteName,);
+                  Navigator.pushNamed(
+                    context,
+                    AppRoutes.updateProfileRouteName,
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.yellowColor,
                   foregroundColor: AppColors.blackColor,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      context.width * 0.025,
-                    ),
+                    borderRadius: BorderRadius.circular(context.width * 0.025),
                   ),
                 ),
                 child: Text(
@@ -43,7 +44,7 @@ class ProfileActions extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: context.width * 0.02,),
+          SizedBox(width: context.width * 0.02),
           Expanded(
             flex: 2,
             child: SizedBox(
@@ -53,30 +54,23 @@ class ProfileActions extends StatelessWidget {
                   Navigator.pushNamedAndRemoveUntil(
                     context,
                     AppRoutes.loginRouteName,
-                        (route) => false,);
+                    (route) => false,
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.redColor,
                   foregroundColor: AppColors.whiteColor,
                   elevation: 0,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                      context.width * 0.025,
-                    ),
+                    borderRadius: BorderRadius.circular(context.width * 0.025),
                   ),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      'exit'.tr(),
-                      style: AppStyles.reg16WhiteRoboto,
-                    ),
-                    SizedBox(width: context.width * 0.015,),
-                    Icon(
-                      Icons.logout,
-                      size: 18,
-                    ),
+                    Text('exit'.tr(), style: AppStyles.reg16WhiteRoboto),
+                    SizedBox(width: context.width * 0.015),
+                    Icon(Icons.logout, size: 18),
                   ],
                 ),
               ),

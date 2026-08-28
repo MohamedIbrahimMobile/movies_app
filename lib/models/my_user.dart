@@ -16,13 +16,13 @@ class MyUser {
   });
 
   MyUser.fromFirestore(Map<String, dynamic> data)
-      : this(
-    id: data['id'] ?? '',
-    email: data['email'] ?? '',
-    name: data['name'] ?? '',
-    phone: data['phone'] ?? '',
-    avatarIndex: data['avatarIndex'] ?? 0,
-  );
+    : this(
+        id: data['id'] ?? '',
+        email: data['email'] ?? '',
+        name: data['name'] ?? '',
+        phone: data['phone'] ?? '',
+        avatarIndex: data['avatarIndex'] ?? 0,
+      );
 
   Map<String, dynamic> toFirestore() {
     return {

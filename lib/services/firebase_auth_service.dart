@@ -23,12 +23,8 @@ class FirebaseAuthService {
     );
   }
 
-  Future<void> forgetPassword({
-    required String email,
-  }) async {
-    await _firebaseAuth.sendPasswordResetEmail(
-      email: email.trim(),
-    );
+  Future<void> forgetPassword({required String email}) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email.trim());
   }
 
   Future<void> logout() async {

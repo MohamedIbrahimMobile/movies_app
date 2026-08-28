@@ -14,11 +14,7 @@ class ProfileTab extends StatelessWidget {
       backgroundColor: AppColors.blackColor,
       body: SafeArea(
         child: Column(
-          children: [
-            ProfileStats(),
-            ProfileActions(),
-            ProfileWatchList(),
-          ],
+          children: [ProfileStats(), ProfileActions(), ProfileWatchList()],
         ),
       ),
     );

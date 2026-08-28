@@ -23,29 +23,17 @@ class RegisterEvent extends AuthEvent {
   });
 
   @override
-  List<Object?> get props => [
-    name,
-    email,
-    password,
-    phone,
-    avatarIndex,
-  ];
+  List<Object?> get props => [name, email, password, phone, avatarIndex];
 }
 
 class LoginEvent extends AuthEvent {
   final String email;
   final String password;
 
-  const LoginEvent({
-    required this.email,
-    required this.password,
-  });
+  const LoginEvent({required this.email, required this.password});
 
   @override
-  List<Object?> get props => [
-    email,
-    password,
-  ];
+  List<Object?> get props => [email, password];
 }
 
 class GoogleLoginEvent extends AuthEvent {
@@ -55,9 +43,7 @@ class GoogleLoginEvent extends AuthEvent {
 class ForgetPasswordEvent extends AuthEvent {
   final String email;
 
-  const ForgetPasswordEvent({
-    required this.email,
-  });
+  const ForgetPasswordEvent({required this.email});
 
   @override
   List<Object?> get props => [email];
@@ -79,11 +65,7 @@ class UpdateProfileEvent extends AuthEvent {
   });
 
   @override
-  List<Object?> get props => [
-    name,
-    phone,
-    avatarIndex,
-  ];
+  List<Object?> get props => [name, phone, avatarIndex];
 }
 
 class DeleteAccountEvent extends AuthEvent {

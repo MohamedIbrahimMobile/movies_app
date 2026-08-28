@@ -1,107 +1,123 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/utils/app_assets.dart';
+import 'package:movies_app/api/api_manager.dart';
+import 'package:movies_app/api/model/movie.dart';
+import 'package:movies_app/ui/home/tabs/home/widgets/movie_card.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles.dart';
 import 'package:movies_app/utils/size_utils.dart';
+import 'package:movies_app/widgets/main_error_widget.dart';
+import 'package:movies_app/widgets/main_loading_widget.dart';
 
-import '../../../../../utils/app_routes.dart';
+class MovieCategory extends StatefulWidget {
+  final String selectedCategory;
+  final VoidCallback onTap;
 
-class MovieCategory extends StatelessWidget {
-  const MovieCategory({super.key});
+  const MovieCategory({
+    super.key,
+    required this.selectedCategory,
+    required this.onTap,
+  });
+
+  @override
+  State<MovieCategory> createState() => _MovieCategoryState();
+}
+
+class _MovieCategoryState extends State<MovieCategory> {
+  late Future<List<Movie>> movies;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    movies = ApiManager.getMovies(genre: widget.selectedCategory);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: Image.asset(
-            AppAssets.watchNowText,
-            height: context.height * 0.15,
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Action',
-              style: AppStyles.reg20WhiteRoboto,
-            ),
-
-            Text(
-              'See More →'.tr(),
-              style: AppStyles.reg14YellowRoboto,
-            ),
-          ],
-        ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: 6,
-          gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: context.width * 0.035,
-            mainAxisSpacing: context.height * 0.02,
-            childAspectRatio: 0.55,
-          ),
-          itemBuilder: (context, index) {
-            return InkWell(
-              onTap: (){
-                Navigator.pushNamed(
-                  context,
-                  AppRoutes.movieDetailsScreenRouteName,
-                );
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(
-                  context.width * 0.035,
-                ),
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Image.asset(
-                        AppAssets.samMendesImage,
-                        fit: BoxFit.cover,
+    return FutureBuilder<List<Movie>>(
+      future: movies,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return SizedBox(
+            height: context.height * 0.265,
+            child: MainLoadingWidget(),
+          );
+        } else if (snapshot.hasError) {
+          return MainErrorWidget(
+            message: snapshot.error.toString(),
+            onPressed: () {
+              movies = ApiManager.getMovies(genre: widget.selectedCategory);
+              setState(() {});
+            },
+          );
+        } else {
+          List<Movie> moviesList = snapshot.data!;
+          return Padding(
+            padding: EdgeInsetsDirectional.only(start: context.width * 0.04),
+            child: Column(
+              spacing: context.height * 0.012,
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.only(
+                    end: context.width * 0.04,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        widget.selectedCategory.tr(),
+                        style: AppStyles.reg20WhiteRoboto,
                       ),
-                    ),
-                    Positioned(
-                      top: context.height * 0.005,
-                      left: context.width * 0.01,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: context.width * 0.018,
-                          vertical: context.height * 0.004,
-                        ),
-                        decoration: BoxDecoration(
-                          color: AppColors.darkGrayColor,
-                          borderRadius: BorderRadius.circular(
-                            context.width * 0.025,
-                          ),
-                        ),
+                      GestureDetector(
+                        onTap: widget.onTap,
                         child: Row(
-                          mainAxisSize: MainAxisSize.min,
+                          spacing: context.height * 0.006,
                           children: [
                             Text(
-                              '7.7',
-                              style: AppStyles.reg14YellowRoboto,
+                              'see_more'.tr(),
+                              style: AppStyles.reg16YellowRoboto,
                             ),
                             Icon(
-                              Icons.star,
+                              Icons.arrow_forward,
                               color: AppColors.yellowColor,
-                              size: context.height * 0.018,
+                              size: 15,
                             ),
                           ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
-        ),
-      ],
+                SizedBox(
+                  height: context.height * 0.265,
+                  child: ListView.separated(
+                    itemCount: moviesList.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Row(
+                        children: [
+                          MovieCard(
+                            movie: moviesList[index],
+                            width: context.width * 0.38,
+                          ),
+                          Visibility(
+                            visible: index == moviesList.length - 1,
+                            child: SizedBox(width: context.width * 0.04),
+                          ),
+                        ],
+                      );
+                    },
+                    separatorBuilder: (context, index) {
+                      return SizedBox(width: context.width * 0.04);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }

@@ -61,19 +61,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthBloc(
-        authRepository: AuthRepository(),
-      ),
+      create: (_) => AuthBloc(authRepository: AuthRepository()),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is RegisterSuccess) {
             DialogUtils.showSuccessToast(
               message: 'account_created_success'.tr(),
             );
-            Navigator.pushReplacementNamed(
-              context,
-              AppRoutes.homeRouteName,
-            );
+            Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
           }
           if (state is AuthError) {
             DialogUtils.showMessage(
@@ -90,15 +85,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             appBar: AppBar(
               centerTitle: true,
-              title: Text(
-                'register'.tr(),
-                style: AppStyles.reg16YellowRoboto,
-              ),
+              title: Text('register'.tr(), style: AppStyles.reg16YellowRoboto),
             ),
             body: SafeArea(
               child: SingleChildScrollView(
                 keyboardDismissBehavior:
-                ScrollViewKeyboardDismissBehavior.onDrag,
+                    ScrollViewKeyboardDismissBehavior.onDrag,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: context.width * 0.04,
@@ -106,7 +98,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Form(
                     key: formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         CarouselSlider.builder(
                           itemCount: avatarImageList.length,
@@ -139,14 +130,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           textAlign: TextAlign.center,
                           style: AppStyles.reg16WhiteRoboto,
                         ),
-                        SizedBox(
-                          height: context.height * 0.02,
-                        ),
+                        SizedBox(height: context.height * 0.02),
                         CustomTextField(
                           controller: nameController,
-                          prefixIcon: Image.asset(
-                            AppAssets.nameIcon,
-                          ),
+                          prefixIcon: Image.asset(AppAssets.nameIcon),
                           hintText: 'name'.tr(),
                           hintStyle: AppStyles.reg16WhiteRoboto,
                           validator: (text) {
@@ -156,14 +143,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(
-                          height: context.height * 0.02,
-                        ),
+                        SizedBox(height: context.height * 0.02),
                         CustomTextField(
                           controller: emailController,
-                          prefixIcon: Image.asset(
-                            AppAssets.emailIcon,
-                          ),
+                          prefixIcon: Image.asset(AppAssets.emailIcon),
                           hintText: 'email'.tr(),
                           hintStyle: AppStyles.reg16WhiteRoboto,
                           keyboardType: TextInputType.emailAddress,
@@ -180,14 +163,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(
-                          height: context.height * 0.02,
-                        ),
+                        SizedBox(height: context.height * 0.02),
                         CustomTextField(
                           controller: passwordController,
-                          prefixIcon: Image.asset(
-                            AppAssets.passwordIcon,
-                          ),
+                          prefixIcon: Image.asset(AppAssets.passwordIcon),
                           suffixIcon: IconButton(
                             icon: Icon(
                               isPasswordObscured
@@ -214,14 +193,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(
-                          height: context.height * 0.02,
-                        ),
+                        SizedBox(height: context.height * 0.02),
                         CustomTextField(
                           controller: confirmPasswordController,
-                          prefixIcon: Image.asset(
-                            AppAssets.passwordIcon,
-                          ),
+                          prefixIcon: Image.asset(AppAssets.passwordIcon),
                           suffixIcon: IconButton(
                             icon: Icon(
                               isConfirmPasswordObscured
@@ -232,7 +207,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             onPressed: () {
                               setState(() {
                                 isConfirmPasswordObscured =
-                                !isConfirmPasswordObscured;
+                                    !isConfirmPasswordObscured;
                               });
                             },
                           ),
@@ -249,12 +224,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             return null;
                           },
                         ),
-                        SizedBox(height: context.height * 0.02,),
+                        SizedBox(height: context.height * 0.02),
                         CustomTextField(
                           controller: phoneController,
-                          prefixIcon: Image.asset(
-                            AppAssets.phoneIcon,
-                          ),
+                          prefixIcon: Image.asset(AppAssets.phoneIcon),
                           hintText: 'phone_number'.tr(),
                           hintStyle: AppStyles.reg16WhiteRoboto,
                           keyboardType: TextInputType.phone,
@@ -263,21 +236,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               return 'please_enter_phone_number'.tr();
                             }
                             final cleanText = text.trim();
-                            final phoneValid = RegExp(r'^[0-9]+$').hasMatch(cleanText);
+                            final phoneValid = RegExp(r'^[0-9]+$')
+                                .hasMatch(cleanText);
                             if (!phoneValid) {
                               return 'please_enter_numbers_only'.tr();
                             }
-                            final egyptianPhoneValid = RegExp(r'^01[0125][0-9]{8}$').hasMatch(cleanText);
+                            final egyptianPhoneValid = RegExp(
+                              r'^01[0125][0-9]{8}$',
+                            ).hasMatch(cleanText);
                             if (!egyptianPhoneValid) {
                               return 'invalid_phone_number'.tr();
                             }
                             return null;
                           },
                         ),
-                        SizedBox(height: context.height * 0.025,),
+                        SizedBox(height: context.height * 0.025),
                         CustomElevatedButton(
+                          verticalPadding: context.height * 0.014,
                           backgroundColor: AppColors.yellowColor,
-                          verticalPadding: context.height * 0.012,
                           onPressed: () {
                             if (isLoading) {
                               return;
@@ -285,21 +261,26 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             register(context);
                           },
                           child: isLoading
-                              ? const SizedBox(
-                            width: 22,
-                            height: 22,
-                            child: CircularProgressIndicator(
-                              color: AppColors.blackColor,
-                            ),
-                          )
-                              : Text(
-                            'create_account'.tr(),
-                            style: AppStyles.reg20BlackRoboto,
-                          ),
+                              ? Container(
+                                  alignment: Alignment.center,
+                                  height: context.height * 0.035,
+                                  child: SizedBox(
+                                    height: context.height * 0.027,
+                                    width: context.width * 0.06,
+                                    child: CircularProgressIndicator(
+                                      color: AppColors.blackColor,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'create_account'.tr(),
+                                    style: AppStyles.reg20BlackRoboto,
+                                  ),
+                                ),
                         ),
-                        SizedBox(
-                          height: context.height * 0.01,
-                        ),
+                        SizedBox(height: context.height * 0.01),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -321,13 +302,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: context.height * 0.01,
-                        ),
+                        SizedBox(height: context.height * 0.01),
                         const LanguageToggleSwitch(),
-                        SizedBox(
-                          height: context.height * 0.02,
-                        ),
+                        SizedBox(height: context.height * 0.04),
                       ],
                     ),
                   ),
