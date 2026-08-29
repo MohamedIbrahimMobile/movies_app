@@ -94,6 +94,7 @@
   "Description": "الوصف",
   "cast": "طاقم التمثيل",
   "genres": "الأنواع",
+  "no_movies_found": "لم يتم العثور على أفلام"
   "logout_confirmation": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
   "logout_success": "تم تسجيل الخروج بنجاح",
   "logout_failed": "فشل تسجيل الخروج",
