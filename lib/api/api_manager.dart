@@ -99,4 +99,26 @@ class ApiManager {
         return 'A network connection error occurred.';
     }
   }
+
+   static Future<List<Movie>> searchMovie(String query) async {
+    try {
+      final response = await dio.get(
+        EndPoint.moviesApi,
+        queryParameters: {
+          'query_term': query.trim(),
+          'sort_by': 'download_count',
+          'limit': 30,
+        },
+      );
+
+      final List moviesList = response.data?['data']?['movies'] ?? [];
+      return moviesList.map((e) => Movie.fromJson(e)).toList();
+
+    } on DioException catch (e) {
+      throw Exception(handleDioError(e));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
 }
