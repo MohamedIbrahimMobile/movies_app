@@ -9,8 +9,8 @@ class ApiManager {
   static final Dio dio = Dio(
     BaseOptions(
       baseUrl: ApiConstants.baseUrl,
-      connectTimeout: const Duration(seconds: 15),
-      receiveTimeout: const Duration(seconds: 15),
+      connectTimeout: const Duration(seconds: 50),
+      receiveTimeout: const Duration(seconds: 50),
     ),
   );
 
@@ -32,7 +32,6 @@ class ApiManager {
       );
 
       final movies = response.data['data']['movies'] as List;
-
       return movies.map((movie) => Movie.fromJson(movie)).toList();
     } on DioException catch (e) {
       throw Exception(handleDioError(e));

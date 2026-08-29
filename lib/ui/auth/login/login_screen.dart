@@ -27,6 +27,24 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isPasswordObscured = true;
+  bool _showLogoutMessage = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!_showLogoutMessage &&
+        ModalRoute.of(context)?.settings.arguments == true) {
+      _showLogoutMessage = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) {
+          return;
+        }
+        DialogUtils.showSuccessToast(
+          message: 'logged_out_successfully'.tr(),
+        );
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -38,12 +56,20 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => AuthBloc(authRepository: AuthRepository()),
+      create: (_) => AuthBloc(
+        authRepository: AuthRepository(),
+      ),
       child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is LoginSuccess || state is GoogleLoginSuccess) {
-            DialogUtils.showSuccessToast(message: 'logged_in_success'.tr());
-            Navigator.pushReplacementNamed(context, AppRoutes.homeRouteName);
+          if (state is LoginSuccess ||
+              state is GoogleLoginSuccess) {
+            DialogUtils.showSuccessToast(
+              message: 'logged_in_success'.tr(),
+            );
+            Navigator.pushReplacementNamed(
+              context,
+              AppRoutes.homeRouteName,
+            );
           }
           if (state is AuthError) {
             DialogUtils.showMessage(
@@ -55,7 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         builder: (context, state) {
           final isLoading = state is AuthLoading;
-
           return Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: SafeArea(
