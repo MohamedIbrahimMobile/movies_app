@@ -99,7 +99,7 @@ class ApiManager {
     }
   }
 
-  static Future<List<Movie>> searchMovie(String query) async {
+   static Future<List<Movie>> searchMovie(String query) async {
     try {
       final response = await dio.get(
         EndPoint.moviesApi,
@@ -119,4 +119,5 @@ class ApiManager {
       rethrow;
     }
   }
+
 }

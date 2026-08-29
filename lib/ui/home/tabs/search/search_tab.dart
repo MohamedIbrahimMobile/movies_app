@@ -17,8 +17,8 @@ class SearchTab extends StatefulWidget {
 }
 
 class _SearchTabState extends State<SearchTab> {
-  String query = '' ;
-  Future<List<Movie>>? searchFuture;
+ String query = '' ;
+ Future<List<Movie>>? searchFuture;
 
   void onSearchChanged(String value) {
     setState(() {
@@ -68,65 +68,65 @@ class _SearchTabState extends State<SearchTab> {
                   ),
                 )
                     : FutureBuilder<List<Movie>>(
-                  future: searchFuture,
-                  builder:(context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return  Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text(
-                          snapshot.error.toString(),
-                          style:  TextStyle(color: Colors.white),
-                        ),
-                      );
-                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return  Center(
-                        child: Text(
-                          'No movies found'.tr(),
-                          style: AppStyles.bold24WhiteRoboto,
-                        ),
-                      );
-                    }else {
-                      List<Movie> moviesList = snapshot.data!;
-                      return ListView.separated(
-                          itemBuilder: (context, index) {
-                            final movie = moviesList[index];
-                            return ListTile(
-                              titleAlignment: ListTileTitleAlignment.top,
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                    AppRoutes.movieDetailsScreenRouteName,
+                    future: searchFuture,
+                    builder:(context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return  Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            snapshot.error.toString(),
+                            style:  TextStyle(color: Colors.white),
+                          ),
+                        );
+                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                        return  Center(
+                          child: Text(
+                            'No movies found',
+                            style: AppStyles.bold24WhiteRoboto,
+                          ),
+                        );
+                      }else {
+                        List<Movie> moviesList = snapshot.data!;
+                        return ListView.separated(
+                            itemBuilder: (context, index) {
+                              final movie = moviesList[index];
+                              return ListTile(
+                                titleAlignment: ListTileTitleAlignment.top,
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                      AppRoutes.movieDetailsScreenRouteName,
                                     arguments: movie.id
-                                );
-                              },
-                              leading: ClipRRect(
-                                clipBehavior: Clip.antiAlias,
-                                child: SizedBox(
-                                  width: context.width*0.1,
-                                  height: context.height*0.1,
-                                  child: Image.network(
-                                    movie.mediumCoverImage ?? '',
-                                    fit: BoxFit.cover,
+                                  );
+                                },
+                                leading: ClipRRect(
+                                  clipBehavior: Clip.antiAlias,
+                                  child: SizedBox(
+                                    width: context.width*0.1,
+                                    height: context.height*0.1,
+                                    child: Image.network(
+                                      movie.mediumCoverImage ?? '',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              title: Text(
-                                movie.title ?? '',
-                                style: AppStyles.bold20WhiteRoboto,
-                              ),
-                              subtitle: Text(
-                                '${movie.year ?? ''} • ⭐ ${movie.rating ?? ''}',
-                                style: AppStyles.reg16LightGrayRoboto,
-                              ),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return SizedBox(height: context.height*0.01);
-                          },
-                          itemCount: moviesList.length
-                      );
-                    }
-                  },
+                                title: Text(
+                                  movie.title ?? '',
+                                  style: AppStyles.bold20WhiteRoboto,
+                                ),
+                                subtitle: Text(
+                                  '${movie.year ?? ''} • ⭐ ${movie.rating ?? ''}',
+                                  style: AppStyles.reg16LightGrayRoboto,
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(height: context.height*0.01);
+                            },
+                            itemCount: moviesList.length
+                        );
+                      }
+                    },
                 ),
               ),
             ],

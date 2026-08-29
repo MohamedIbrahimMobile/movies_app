@@ -31,7 +31,7 @@ class _AvailableMoviesState extends State<AvailableMovies> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height * 0.64,
+      height: context.height * 0.60,
       child: FutureBuilder<List<Movie>>(
         future: movies,
         builder: (context, snapshot) {
