@@ -13,8 +13,14 @@ class ProfileTab extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.blackColor,
       body: SafeArea(
-        child: Column(
-          children: [ProfileStats(), ProfileActions(), ProfileWatchList()],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ProfileStats(),
+              ProfileActions(),
+              ProfileWatchList(),
+            ],
+          ),
         ),
       ),
     );
