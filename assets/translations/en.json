@@ -93,5 +93,6 @@
   "Thriller": "Thriller",
   "summary": "Summary",
   "cast": "Cast",
-  "genres": "Genres"
+  "genres": "Genres",
+  "no_movies_found": "No Movies Found"
 }
