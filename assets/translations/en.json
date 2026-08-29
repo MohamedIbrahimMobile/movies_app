@@ -91,8 +91,13 @@
   "Sci-Fi": "Sci-Fi",
   "Sport": "Sport",
   "Thriller": "Thriller",
-  "summary": "Summary",
+  "Description": "Description",
   "cast": "Cast",
   "genres": "Genres",
   "no_movies_found": "No Movies Found"
+  "logout_confirmation": "Are you sure you want to logout?",
+  "logout_success": "Logged out successfully",
+  "logout_failed": "Logout failed",
+  "logged_out_successfully": "Logged out successfully"
+
 }

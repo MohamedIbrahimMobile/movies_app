@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/api/model/movie.dart';
 import 'package:movies_app/blocs/movie_details/movie_details_cubit.dart';
 import 'package:movies_app/blocs/movie_details/movie_details_state.dart';
+import 'package:movies_app/services/firestore_service.dart';
 import 'package:movies_app/ui/movie_details/widgets/custom_btn.dart';
 import 'package:movies_app/ui/movie_details/widgets/movie_cast.dart';
 import 'package:movies_app/ui/movie_details/widgets/movie_details_up_section.dart';
@@ -25,26 +28,152 @@ class MovieDetailsScreen extends StatefulWidget {
 }
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
+  final FirestoreService _firestoreService = FirestoreService();
+
   bool isSaved = false;
   bool isPlay = false;
+  bool isSaving = false;
+
+  bool _movieDataHandled = false;
 
   YoutubePlayerController? youtubeController;
+
   final ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+
     scrollController.addListener(scrollListener);
+  }
+
+  Future<void> _loadSavedState(int movieId) async {
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+
+    if (firebaseUser == null) {
+      return;
+    }
+
+    try {
+      final saved = await _firestoreService.isMovieInWatchList(
+        userId: firebaseUser.uid,
+        movieId: movieId,
+      );
+
+      if (!mounted) {
+        return;
+      }
+
+      setState(() {
+        isSaved = saved;
+      });
+    } catch (e) {
+      debugPrint('Load saved state error: $e');
+    }
+  }
+
+  Future<void> _saveToHistory(Movie movie) async {
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+
+    if (firebaseUser == null || movie.id == null) {
+      return;
+    }
+
+    try {
+      await _firestoreService.addMovieToHistory(
+        userId: firebaseUser.uid,
+        movie: movie,
+      );
+    } catch (e) {
+      debugPrint('Save history error: $e');
+    }
+  }
+
+  Future<void> _toggleWatchList(Movie movie) async {
+    final firebaseUser = FirebaseAuth.instance.currentUser;
+
+    if (firebaseUser == null || movie.id == null || isSaving) {
+      return;
+    }
+
+    setState(() {
+      isSaving = true;
+    });
+
+    try {
+      if (isSaved) {
+        await _firestoreService.removeMovieFromWatchList(
+          userId: firebaseUser.uid,
+          movieId: movie.id!,
+        );
+
+        if (!mounted) {
+          return;
+        }
+
+        setState(() {
+          isSaved = false;
+        });
+      } else {
+        await _firestoreService.addMovieToWatchList(
+          userId: firebaseUser.uid,
+          movie: movie,
+        );
+
+        if (!mounted) {
+          return;
+        }
+
+        setState(() {
+          isSaved = true;
+        });
+      }
+    } catch (e) {
+      if (!mounted) {
+        return;
+      }
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e.toString(),
+          ),
+        ),
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          isSaving = false;
+        });
+      }
+    }
+  }
+
+  void _handleMovie(Movie movie) {
+    if (_movieDataHandled) {
+      return;
+    }
+
+    _movieDataHandled = true;
+
+    if (movie.id != null) {
+      _loadSavedState(movie.id!);
+    }
+
+    _saveToHistory(movie);
   }
 
   @override
   Widget build(BuildContext context) {
-    final int movieId = ModalRoute.of(context)!.settings.arguments as int;
+    final int movieId =
+    ModalRoute.of(context)!.settings.arguments as int;
 
     return BlocProvider(
-      create: (context) => MovieDetailsCubit()..getMovieDetails(movieId),
+      create: (context) => MovieDetailsCubit()
+        ..getMovieDetails(movieId),
       child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor:
+        Theme.of(context).scaffoldBackgroundColor,
         body: BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
           builder: (context, state) {
             if (state is MovieLoadingState) {
@@ -55,15 +184,19 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
               return Center(
                 child: MainErrorWidget(
                   message: state.errorMessage,
-                  onPressed: () => context
-                      .read<MovieDetailsCubit>()
-                      .getMovieDetails(movieId),
+                  onPressed: () {
+                    context
+                        .read<MovieDetailsCubit>()
+                        .getMovieDetails(movieId);
+                  },
                 ),
               );
             }
 
             if (state is MovieSuccessState) {
-              final movie = state.movie;
+              final Movie movie = state.movie;
+
+              _handleMovie(movie);
 
               return SingleChildScrollView(
                 controller: scrollController,
@@ -72,29 +205,29 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     Stack(
                       alignment: Alignment.center,
                       children: [
-                        isPlay
-                            ? SafeArea(
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    top: context.height * 0.12,
-                                  ),
-                                  child: YoutubePlayer(
-                                    controller: youtubeController!,
-                                    aspectRatio: 8 / 6,
-                                  ),
-                                ),
-                              )
+                        isPlay ? SafeArea(
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: context.height * 0.12,
+                            ),
+                            child: YoutubePlayer(
+                              controller: youtubeController!,
+                              aspectRatio: 8 / 6,
+                            ),
+                          ),
+                        )
                             : Image.network(
-                                movie.mediumCoverImage!,
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: context.height * 0.6,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return ImageErrorPlaceholder(
-                                    height: context.height * 0.6,
-                                  );
-                                },
-                              ),
+                          movie.mediumCoverImage ?? '',
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: context.height * 0.6,
+                          errorBuilder:
+                              (context, error, stackTrace) {
+                            return ImageErrorPlaceholder(
+                              height: context.height * 0.6,
+                            );
+                          },
+                        ),
 
                         if (!isPlay)
                           Container(
@@ -102,7 +235,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
-                                  AppColors.blackColor.withValues(alpha: 0.2),
+                                  AppColors.blackColor
+                                      .withValues(alpha: 0.2),
                                   AppColors.blackColor,
                                 ],
                                 begin: Alignment.topCenter,
@@ -116,7 +250,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                           left: context.width * 0.04,
                           right: context.width * 0.04,
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment:
+                            MainAxisAlignment.spaceBetween,
                             children: [
                               CustomBtn(
                                 isPlay: isPlay,
@@ -128,8 +263,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                                   }
                                 },
                                 child: Icon(
-                                  isPlay
-                                      ? Icons.close
+                                  isPlay ? Icons.close
                                       : Icons.arrow_back_ios_new,
                                   color: AppColors.whiteColor,
                                 ),
@@ -138,14 +272,22 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                               CustomBtn(
                                 isPlay: isPlay,
                                 onTap: () {
-                                  isSaved = !isSaved;
-                                  setState(() {});
+                                  _toggleWatchList(movie);
                                 },
-                                child: Icon(
-                                  size: context.width * 0.075,
+                                child: isSaving ? SizedBox(
+                                  width: context.width * 0.06,
+                                  height: context.width * 0.06,
+                                  child:
+                                  CircularProgressIndicator(
+                                    color:
+                                    AppColors.yellowColor,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                                    : Icon(
                                   Icons.bookmark_rounded,
-                                  color: isSaved
-                                      ? AppColors.yellowColor
+                                  size: context.width * 0.075,
+                                  color: isSaved ? AppColors.yellowColor
                                       : AppColors.whiteColor,
                                 ),
                               ),
@@ -160,9 +302,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             top: context.height * 0.28,
                             child: InkWell(
                               onTap: () {
-                                playTrailer(movie.ytTrailerCode!);
+                                playTrailer(
+                                  movie.ytTrailerCode!,
+                                );
                               },
-                              child: Image.asset(AppAssets.playImage),
+                              child: Image.asset(
+                                AppAssets.playImage,
+                              ),
                             ),
                           ),
                       ],
@@ -177,19 +323,34 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                         child: Column(
                           spacing: context.height * 0.05,
                           children: [
-                            MovieDetailsUpSection(movie: movie),
+                            MovieDetailsUpSection(
+                              movie: movie,
+                            ),
+
                             MovieScreenShot(
                               screenshotImage1:
-                                  movie.mediumScreenshotImage1 ?? '',
+                              movie.mediumScreenshotImage1 ?? '',
                               screenshotImage2:
-                                  movie.mediumScreenshotImage2 ?? '',
+                              movie.mediumScreenshotImage2 ?? '',
                               screenshotImage3:
-                                  movie.mediumScreenshotImage3 ?? '',
+                              movie.mediumScreenshotImage3 ?? '',
                             ),
-                            SimilarMovies(movieId: movie.id!),
-                            MovieSummary(summary: movie.descriptionFull ?? ''),
-                            MovieCast(castList: movie.cast),
-                            MovieGenres(genres: movie.genres),
+
+                            SimilarMovies(
+                              movieId: movie.id!,
+                            ),
+
+                            MovieSummary(
+                              description: movie.descriptionFull ?? '',
+                            ),
+
+                            MovieCast(
+                              castList: movie.cast,
+                            ),
+
+                            MovieGenres(
+                              genres: movie.genres,
+                            ),
                             SizedBox(),
                           ],
                         ),
@@ -199,7 +360,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                 ),
               );
             }
-            return const SizedBox();
+            return SizedBox();
           },
         ),
       ),
@@ -207,16 +368,19 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   }
 
   void playTrailer(String trailerCode) {
-    if (trailerCode.isEmpty) return;
+    if (trailerCode.isEmpty) {
+      return;
+    }
 
-    youtubeController = YoutubePlayerController.fromVideoId(
-      videoId: trailerCode,
-      autoPlay: true,
-      params: const YoutubePlayerParams(
-        showControls: true,
-        showFullscreenButton: true,
-      ),
-    );
+    youtubeController =
+        YoutubePlayerController.fromVideoId(
+          videoId: trailerCode,
+          autoPlay: true,
+          params: const YoutubePlayerParams(
+            showControls: true,
+            showFullscreenButton: true,
+          ),
+        );
 
     setState(() {
       isPlay = true;
@@ -224,13 +388,15 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   }
 
   void scrollListener() {
-    if (youtubeController?.value.playerState == PlayerState.playing) {
+    if (youtubeController?.value.playerState ==
+        PlayerState.playing) {
       youtubeController?.pauseVideo();
     }
   }
 
   void closeBtn() {
     youtubeController?.close();
+
     setState(() {
       youtubeController = null;
       isPlay = false;
@@ -242,6 +408,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
     scrollController.removeListener(scrollListener);
     scrollController.dispose();
     youtubeController?.close();
+
     super.dispose();
   }
 }
