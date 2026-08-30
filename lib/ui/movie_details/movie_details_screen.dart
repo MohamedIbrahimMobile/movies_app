@@ -235,8 +235,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
-                                  AppColors.blackColor
-                                      .withValues(alpha: 0.2),
+                                  AppColors.blackColor.withValues(alpha: 0.2),
                                   AppColors.blackColor,
                                 ],
                                 begin: Alignment.topCenter,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'app_colors.dart';
 
 class AppStyles {
@@ -115,12 +114,6 @@ class AppStyles {
   static TextStyle bold20LightGrayRoboto = GoogleFonts.roboto(
     fontWeight: FontWeight.bold,
     fontSize: 20,
-    color: AppColors.lightGrayColor,
-  );
-
-  static TextStyle reg16LightGrayRoboto = GoogleFonts.roboto(
-    fontWeight: FontWeight.w400,
-    fontSize: 16,
     color: AppColors.lightGrayColor,
   );
 

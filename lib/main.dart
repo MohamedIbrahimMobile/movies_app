@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
-      initialRoute: AppRoutes.homeRouteName,
+      initialRoute: AppRoutes.onboardingRouteName,
       routes: {
         AppRoutes.onboardingRouteName: (context) => OnboardingScreen(),
         AppRoutes.loginRouteName: (context) => LoginScreen(),
@@ -49,8 +49,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.homeRouteName: (context) => HomeScreen(),
         AppRoutes.updateProfileRouteName: (context) => UpdateProfileScreen(),
         AppRoutes.forgetPasswordRouteName: (context) => ForgetPassword(),
-        AppRoutes.movieDetailsScreenRouteName: (context) =>
-            MovieDetailsScreen(),
+        AppRoutes.movieDetailsScreenRouteName: (context) => MovieDetailsScreen(),
       },
     );
   }

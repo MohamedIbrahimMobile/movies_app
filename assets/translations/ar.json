@@ -64,7 +64,7 @@
   "account_created_success": "تم إنشاء الحساب بنجاح",
   "account_deleted_success": "تم حذف الحساب بنجاح",
   "delete_account_title": "حذف الحساب",
-  "delete_account_confirm_message": "هل أنت تأكد من أنك تريد حذف حسابك؟",
+  "delete_account_confirm_message": "هل أنت متأكد أنك تريد حذف حسابك؟",
   "please_enter_email": "يرجى إدخال البريد الإلكتروني",
   "please_enter_valid_email": "يرجى إدخال بريد إلكتروني صحيح",
   "please_enter_password": "يرجى إدخال كلمة المرور",
@@ -94,7 +94,7 @@
   "Description": "الوصف",
   "cast": "طاقم التمثيل",
   "genres": "الأنواع",
-  "no_movies_found": "لم يتم العثور على أفلام"
+  "no_movies_found": "لم يتم العثور على أفلام",
   "logout_confirmation": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
   "logout_success": "تم تسجيل الخروج بنجاح",
   "logout_failed": "فشل تسجيل الخروج",
