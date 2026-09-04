@@ -1,0 +1,13 @@
+class AppRoutes {
+  static const String splashScreenRouteName = 'splash_screen';
+  static const String onboardingRouteName = 'onboarding_screen';
+  static const String loginRouteName = 'login_screen';
+  static const String registerRouteName = 'register_screen';
+  static const String forgetPasswordRouteName = 'forget_password_screen';
+  static const String homeRouteName = 'home_screen';
+  static const String updateProfileRouteName = 'update_profile_screen';
+
+  static const String movieDetailsScreenRouteName = 'movie_details_screen';
+
+  static const String similarMoviesRouteName = 'similar_movies_screen';
+}
