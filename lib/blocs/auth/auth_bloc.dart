@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show debugPrint, debugPrintStack;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/blocs/auth/auth_event.dart';
 import 'package:movies_app/blocs/auth/auth_state.dart';
@@ -60,7 +61,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await authRepository.loginWithGoogle();
 
       emit(GoogleLoginSuccess());
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('Google sign-in failed (${e.runtimeType}): $e');
+      debugPrintStack(stackTrace: stackTrace);
       emit(AuthError(AuthErrorHandler.handle(e)));
     }
   }
