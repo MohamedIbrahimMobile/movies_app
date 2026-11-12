@@ -8,7 +8,12 @@ class AuthRepository {
 
   final FirestoreService _firestoreService = FirestoreService();
 
-  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
+  static final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
+  static Future<void>? _googleSignInInitialization;
+
+  static Future<void> _ensureGoogleSignInInitialized() {
+    return _googleSignInInitialization ??= _googleSignIn.initialize();
+  }
 
   Future<void> register({
     required String name,
@@ -47,7 +52,7 @@ class AuthRepository {
   }
 
   Future<void> loginWithGoogle() async {
-    await _googleSignIn.initialize();
+    await _ensureGoogleSignInInitialized();
 
     final googleUser = await _googleSignIn.authenticate();
 
